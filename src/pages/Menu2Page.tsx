@@ -1,3 +1,4 @@
+import React from 'react';
 
 function Menu2Page() {
     return (
