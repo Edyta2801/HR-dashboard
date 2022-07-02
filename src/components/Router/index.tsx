@@ -3,8 +3,7 @@ import { Route, Routes, } from "react-router-dom";
 import Signin from '../../pages/SigninPage'
 import { ROUTES } from "../../types/routes";
 import Home from "../../pages/HomePage";
-import Signup from '../../pages/SigninPage'
-import Dashboard from "../Layout";
+import Signup from '../../pages/SignupPage'
 import Menu1Page from "../../pages/Menu1Page";
 import Menu2Page from "../../pages/Menu2Page";
 import Layout from "../Layout";
