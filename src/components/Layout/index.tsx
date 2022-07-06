@@ -14,13 +14,17 @@ import Menu1Page from "../../pages/Menu1Page";
 import DashboardPage from "../../pages/DashboardPage";
 import Menu2Page from "../../pages/Menu2Page";
 
+type LayoutProps = {
+  children: React.ReactNode;
+};
 
-function Layout() {
-  let initialWidth: number;
-  initialWidth = 220;
+
+const Layout = (props: LayoutProps) => {
+ const initialWidth:number = 220;
   return (
- 
+
     <Box sx={{ display: "flex" }}>
+      {props.children}
       <CssBaseline />
       <AppBar
         position="fixed"
@@ -43,20 +47,20 @@ function Layout() {
         anchor="left">
         <Toolbar />
         <Divider />
-          <Navigation />
+        <Navigation />
       </Drawer>
-        <Box component="main" sx={{ flexGrow: 1, bgcolor: "background.default", p: 2 }}>
-          <Toolbar />
-          <Routes>
-            <Route path={ROUTES.MENU1} element={<Menu1Page/>} />
-            <Route path={ROUTES.MENU2} element={<Menu2Page />} />
-            {/* <Route path="*" element={<ErrorInfo />} /> */}
-            <Route path={ROUTES.DASHBOARD} element={<DashboardPage />}
-            />
-          </Routes>
-        </Box>
+      <Box component="main" sx={{ flexGrow: 1, bgcolor: "background.default", p: 2 }}>
+        <Toolbar />
+        <Routes>
+          <Route path={ROUTES.MENU1} element={<Menu1Page />} />
+          <Route path={ROUTES.MENU2} element={<Menu2Page />} />
+          {/* <Route path="*" element={<ErrorInfo />} /> */}
+          <Route path={ROUTES.DASHBOARD} element={<DashboardPage />}
+          />
+        </Routes>
+      </Box>
     </Box>
-    
+
   );
 }
 export default Layout;

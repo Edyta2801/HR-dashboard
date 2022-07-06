@@ -16,9 +16,9 @@ const Router = () => {
             <Route path={ROUTES.HOME} element={<Home />} />
             <Route path={ROUTES.SIGNIN} element={<Signin />} />
             <Route path={ROUTES.SIGNUP} element={<Signup />} />
-            <Route path={ROUTES.DASHBOARD} element={<><Layout /><DashboardPage /><Layout /></>} />
-            <Route path={ROUTES.MENU1} element={<><Layout /><Menu1Page /><Layout /></>} />
-            <Route path={ROUTES.MENU2} element={<><Layout /><Menu2Page /><Layout /></>} />
+            <Route path={ROUTES.DASHBOARD} element={<Layout ><DashboardPage /></Layout>} />
+            <Route path={ROUTES.MENU1} element={<Layout><Menu1Page /></Layout>} />
+            <Route path={ROUTES.MENU2} element={<Layout><Menu2Page /></Layout>} />
         </Routes>
     );
 };

@@ -2263,14 +2263,14 @@
   dependencies:
     "@typescript-eslint/utils" "5.25.0"
 
-"@typescript-eslint/parser@^5.0.0", "@typescript-eslint/parser@^5.25.0", "@typescript-eslint/parser@^5.5.0":
-  "integrity" "sha512-r3hwrOWYbNKP1nTcIw/aZoH+8bBnh/Lh1iDHoFpyG4DnCpvEdctrSl6LOo19fZbzypjQMHdajolxs6VpYoChgA=="
-  "resolved" "https://registry.npmjs.org/@typescript-eslint/parser/-/parser-5.25.0.tgz"
-  "version" "5.25.0"
+"@typescript-eslint/parser@^5.0.0", "@typescript-eslint/parser@^5.30.5", "@typescript-eslint/parser@^5.5.0":
+  "integrity" "sha512-zj251pcPXI8GO9NDKWWmygP6+UjwWmrdf9qMW/L/uQJBM/0XbU2inxe5io/234y/RCvwpKEYjZ6c1YrXERkK4Q=="
+  "resolved" "https://registry.npmjs.org/@typescript-eslint/parser/-/parser-5.30.5.tgz"
+  "version" "5.30.5"
   dependencies:
-    "@typescript-eslint/scope-manager" "5.25.0"
-    "@typescript-eslint/types" "5.25.0"
-    "@typescript-eslint/typescript-estree" "5.25.0"
+    "@typescript-eslint/scope-manager" "5.30.5"
+    "@typescript-eslint/types" "5.30.5"
+    "@typescript-eslint/typescript-estree" "5.30.5"
     "debug" "^4.3.4"
 
 "@typescript-eslint/scope-manager@5.25.0":
@@ -2280,6 +2280,14 @@
   dependencies:
     "@typescript-eslint/types" "5.25.0"
     "@typescript-eslint/visitor-keys" "5.25.0"
+
+"@typescript-eslint/scope-manager@5.30.5":
+  "integrity" "sha512-NJ6F+YHHFT/30isRe2UTmIGGAiXKckCyMnIV58cE3JkHmaD6e5zyEYm5hBDv0Wbin+IC0T1FWJpD3YqHUG/Ydg=="
+  "resolved" "https://registry.npmjs.org/@typescript-eslint/scope-manager/-/scope-manager-5.30.5.tgz"
+  "version" "5.30.5"
+  dependencies:
+    "@typescript-eslint/types" "5.30.5"
+    "@typescript-eslint/visitor-keys" "5.30.5"
 
 "@typescript-eslint/type-utils@5.25.0":
   "integrity" "sha512-B6nb3GK3Gv1Rsb2pqalebe/RyQoyG/WDy9yhj8EE0Ikds4Xa8RR28nHz+wlt4tMZk5bnAr0f3oC8TuDAd5CPrw=="
@@ -2295,6 +2303,11 @@
   "resolved" "https://registry.npmjs.org/@typescript-eslint/types/-/types-5.25.0.tgz"
   "version" "5.25.0"
 
+"@typescript-eslint/types@5.30.5":
+  "integrity" "sha512-kZ80w/M2AvsbRvOr3PjaNh6qEW1LFqs2pLdo2s5R38B2HYXG8Z0PP48/4+j1QHJFL3ssHIbJ4odPRS8PlHrFfw=="
+  "resolved" "https://registry.npmjs.org/@typescript-eslint/types/-/types-5.30.5.tgz"
+  "version" "5.30.5"
+
 "@typescript-eslint/typescript-estree@5.25.0":
   "integrity" "sha512-MrPODKDych/oWs/71LCnuO7NyR681HuBly2uLnX3r5i4ME7q/yBqC4hW33kmxtuauLTM0OuBOhhkFaxCCOjEEw=="
   "resolved" "https://registry.npmjs.org/@typescript-eslint/typescript-estree/-/typescript-estree-5.25.0.tgz"
@@ -2302,6 +2315,19 @@
   dependencies:
     "@typescript-eslint/types" "5.25.0"
     "@typescript-eslint/visitor-keys" "5.25.0"
+    "debug" "^4.3.4"
+    "globby" "^11.1.0"
+    "is-glob" "^4.0.3"
+    "semver" "^7.3.7"
+    "tsutils" "^3.21.0"
+
+"@typescript-eslint/typescript-estree@5.30.5":
+  "integrity" "sha512-qGTc7QZC801kbYjAr4AgdOfnokpwStqyhSbiQvqGBLixniAKyH+ib2qXIVo4P9NgGzwyfD9I0nlJN7D91E1VpQ=="
+  "resolved" "https://registry.npmjs.org/@typescript-eslint/typescript-estree/-/typescript-estree-5.30.5.tgz"
+  "version" "5.30.5"
+  dependencies:
+    "@typescript-eslint/types" "5.30.5"
+    "@typescript-eslint/visitor-keys" "5.30.5"
     "debug" "^4.3.4"
     "globby" "^11.1.0"
     "is-glob" "^4.0.3"
@@ -2326,6 +2352,14 @@
   "version" "5.25.0"
   dependencies:
     "@typescript-eslint/types" "5.25.0"
+    "eslint-visitor-keys" "^3.3.0"
+
+"@typescript-eslint/visitor-keys@5.30.5":
+  "integrity" "sha512-D+xtGo9HUMELzWIUqcQc0p2PO4NyvTrgIOK/VnSH083+8sq0tiLozNRKuLarwHYGRuA6TVBQSuuLwJUDWd3aaA=="
+  "resolved" "https://registry.npmjs.org/@typescript-eslint/visitor-keys/-/visitor-keys-5.30.5.tgz"
+  "version" "5.30.5"
+  dependencies:
+    "@typescript-eslint/types" "5.30.5"
     "eslint-visitor-keys" "^3.3.0"
 
 "@webassemblyjs/ast@1.11.1":
