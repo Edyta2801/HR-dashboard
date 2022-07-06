@@ -41,7 +41,7 @@ const SigninForm: React.FC = () => {
   const handleLoginSubmit = () => {
     console.log('email', email.current)
     console.log('password', password.current)
-    
+    navigate("/dashboard")
     reset();
   };
 
