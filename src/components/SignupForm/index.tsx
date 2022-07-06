@@ -34,7 +34,7 @@ const SignupForm: React.FC = () => {
 
 
 
-  const handleLoginSubmit = (data: any) => {
+  const handleLoginSubmit = (data: Inputs) => {
     console.log(data);
     reset();
   };
