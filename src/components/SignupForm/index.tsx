@@ -8,35 +8,51 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import api from "../api";
 
-
-type Inputs = {
-  firstName: string,
-  lastName: string,
-  email: string,
-  password: string,
-  retypePassword: string
-};
 
 const SignupForm: React.FC = () => {
-
+  const [isSuccessfullySubmitted, setIsSuccessfullySubmitted] = useState(false);
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     watch,
     reset,
     formState: { errors },
-  } = useForm<Inputs>();
+} = useForm({
+  defaultValues: {
+    firstname:"",
+    lastname:"",
+    username: "",
+    password: "",
+    retypepassword:"",
+  },
+});
 
   const password = useRef({});
   password.current = watch("password", "");
 
 
-
-  const handleLoginSubmit = (data: Inputs) => {
-    console.log(data);
-    reset();
+  const handleLoginSubmit = (values: { firstname:string, lastname:string, username: string; password: string; }) => {
+    return api
+      .register(values.firstname, values.lastname, values.username, values.password)
+      .then((result: any) => {
+        console.log('result', result.data);
+        setIsSuccessfullySubmitted(result.status === 200);
+        setError('');
+        navigate("/dashboard")
+        reset();
+      })
+      .catch(() => {
+        setError('Błędne dane logowania');
+        reset();
+        setIsLoading(false)
+      });
   };
 
   return (
@@ -65,21 +81,21 @@ const SignupForm: React.FC = () => {
                 },
               }}
               sx={{
-                borderBottom: errors.firstName
+                borderBottom: errors.firstname
                   ? "1px solid rgb(250, 0, 0)"
                   : "1px solid  rgb(118,118,118)",
                 marginBottom: 1,
               }}
-              {...register("firstName", {
+              {...register("firstname", {
                 required: "Please fulfill marked fields.",
                 minLength: {
-                  value: 5,
-                  message: "Minimum length is 5",
+                  value: 4,
+                  message: "Minimum length is 4",
                 },
               })}
             ></TextField>
             <Typography sx={{ color: 'red' }}>
-              {errors.firstName?.message}
+              {errors.firstname?.message}
             </Typography>
 
             <TextField
@@ -94,21 +110,21 @@ const SignupForm: React.FC = () => {
                 },
               }}
               sx={{
-                borderBottom: errors.lastName
+                borderBottom: errors.lastname
                   ? "1px solid rgb(250, 0, 0)"
                   : "1px solid  rgb(118,118,118)",
                 marginBottom: 1,
               }}
-              {...register("lastName", {
+              {...register("lastname", {
                 required: "Please fulfill marked fields.",
                 minLength: {
-                  value: 5,
-                  message: "Minimum length is 5",
+                  value: 1,
+                  message: "Minimum length is 1",
                 },
               })}
             ></TextField>
             <Typography sx={{ color: 'red' }}>
-              {errors.lastName?.message}
+              {errors.lastname?.message}
             </Typography>
 
             <TextField
@@ -124,12 +140,12 @@ const SignupForm: React.FC = () => {
                 },
               }}
               sx={{
-                borderBottom: errors.email
+                borderBottom: errors.username
                   ? "1px solid rgb(250, 0, 0)"
                   : "1px solid rgb(118,118,118)",
                 marginBottom: 1,
               }}
-              {...register("email", {
+              {...register("username", {
                 required: "Please fulfill marked fields.",
                 pattern: {
                   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
@@ -138,7 +154,7 @@ const SignupForm: React.FC = () => {
               })}
             ></TextField>
             <Typography sx={{ color: 'red' }}>
-              {errors.email?.message}</Typography>
+              {errors.username?.message}</Typography>
 
             <TextField
               fullWidth
@@ -161,8 +177,8 @@ const SignupForm: React.FC = () => {
               {...register("password", {
                 required: "Please fulfill marked fields.",
                 minLength: {
-                  value: 8,
-                  message: "Minimum length is 8",
+                  value: 5,
+                  message: "Minimum length is 5",
                 },
               })}
             ></TextField>
@@ -183,25 +199,26 @@ const SignupForm: React.FC = () => {
                 },
               }}
               sx={{
-                borderBottom: errors.retypePassword
+                borderBottom: errors.retypepassword
                   ? "1px solid rgb(250, 0, 0)"
                   : "1px solid  rgb(118,118,118)",
                 marginBottom: 1,
               }}
-              {...register("retypePassword", {
+              {...register("retypepassword", {
                 required: "Please fulfill marked fields.",
                 minLength: {
-                  value: 8,
-                  message: "Minimum length is 8",
+                  value: 5,
+                  message: "Minimum length is 5",
                 },
                 validate: value =>
                   value === password.current || "The passwords do not match"
               })}
             ></TextField>
             <Typography sx={{ color: 'red' }}>
-              {errors.retypePassword?.message}
+              {errors.retypepassword?.message}
             </Typography>
-
+            <div>
+            {!isLoading &&
             <Button
               type="submit"
 
@@ -221,7 +238,11 @@ const SignupForm: React.FC = () => {
               }}
             >
               Sign Up
-            </Button>
+            </Button>}
+            {isLoading && <p>Sending request...</p>}
+              {error && <p>{error}</p>}
+            </div>
+            {isSuccessfullySubmitted && <div>Wysłano formularz</div>}
           </form>
           <Box
             sx={{

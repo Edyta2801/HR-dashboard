@@ -15,8 +15,8 @@ const api = {
     return axiosInstance.post('/auth/login', { username, password });
   },
 
-  register() {
-    return axiosInstance.post('/auth/register');
+  register(firstname:string, lastname:string, username:string, password:string) {
+    return axiosInstance.post('/auth/register',  {firstname, lastname, username, password });
   },
 
   getProfile() {
