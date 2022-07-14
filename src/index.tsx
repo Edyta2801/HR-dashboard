@@ -6,14 +6,13 @@ import App from './App';
 import { StyledEngineProvider } from "@mui/material/styles";
 
 
+
 ReactDOM.render(
-  <React.StrictMode>
-    <BrowserRouter> 
-        <StyledEngineProvider>
-          <App />
-        </StyledEngineProvider>
-    </BrowserRouter>
-  </React.StrictMode>,
+  <BrowserRouter>
+    <StyledEngineProvider>
+      <App />
+    </StyledEngineProvider>
+  </BrowserRouter>,
   document.getElementById("root"),
 );
 

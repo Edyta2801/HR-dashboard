@@ -10,15 +10,17 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import React, { useRef} from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocalStorage } from "../../utils/useLocalStorage";
+import api from "../api";
 
 
 const SigninForm: React.FC = () => {
   const [checked, setChecked] = useLocalStorage("checked", false);
-  const password = useRef<string | null>(null);
-  const email = useRef<string | null>(null);
+  const [isSuccessfullySubmitted, setIsSuccessfullySubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const {
@@ -26,37 +28,45 @@ const SigninForm: React.FC = () => {
     handleSubmit,
     watch,
     reset,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm({
     defaultValues: {
-      email: "",
+      username: "",
       password: "",
     },
   });
 
-  password.current = watch("password", "");
-  email.current = watch("email", "");
+  const currentPassword = watch("password", "");
+  const currentUsername = watch("username", "");
 
 
-  const handleLoginSubmit = () => {
-    console.log('email', email.current)
-    console.log('password', password.current)
-    navigate("/dashboard")
-    reset();
+  const handleLoginSubmit = (values: { username: string; password: string; }) => {
+    return api
+      .login(values.username, values.password)
+      .then((result: any) => {
+        console.log('access_token', result.data.access_token);
+        setIsSuccessfullySubmitted(result.status === 200);
+        localStorage.setItem('access_token', result.data.access_token);
+        setError('');
+        navigate("/dashboard")
+        reset();
+      })
+      .catch(() => {
+        setError('Błędne dane logowania');
+        reset();
+        setIsLoading(false)
+      });
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked);
     console.log(event.target.checked)
-    const data = [email.current, password.current]
+    const data = [currentUsername, currentPassword]
     console.log(data)
-    
-    
-    if (email.current !=='' && password.current !==''){
-    localStorage.setItem('data', JSON.stringify(data));}
-    
 
-    
+    if (currentUsername !== '' && currentPassword !== '') {
+      localStorage.setItem('data', JSON.stringify(data));
+    }
   };
 
   return (
@@ -72,13 +82,12 @@ const SigninForm: React.FC = () => {
             User Sign In
           </Typography>
           <form onSubmit={handleSubmit(handleLoginSubmit)}>
-
             <TextField
               fullWidth
               variant="standard"
               autoComplete="username"
-              placeholder="Email *"
-            
+              placeholder="username *"
+              disabled={isSubmitting}
               InputProps={{
                 disableUnderline: true,
                 style: {
@@ -86,12 +95,12 @@ const SigninForm: React.FC = () => {
                 },
               }}
               sx={{
-                borderBottom: errors.email
+                borderBottom: errors.username
                   ? "1px solid rgb(250, 0, 0)"
                   : "1px solid rgb(118,118,118)",
                 marginBottom: 1,
               }}
-              {...register("email", {
+              {...register("username", {
                 required: "Please fulfill marked fields.",
                 pattern: {
                   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
@@ -100,13 +109,14 @@ const SigninForm: React.FC = () => {
               })}
             ></TextField>
             <Typography sx={{ color: 'red' }}>
-              {errors.email?.message}</Typography>
+              {errors.username?.message}</Typography>
             <TextField
               fullWidth
               type="password"
               variant="standard"
               autoComplete="new-password"
               placeholder="Password *"
+              disabled={isSubmitting}
               InputProps={{
                 disableUnderline: true,
                 style: {
@@ -150,26 +160,33 @@ const SigninForm: React.FC = () => {
                 Forgot Password?
               </Link>
             </Box>
-            <Button
-              type="submit"
+            <div>
+              {!isLoading &&
+                <Button
+                  type="submit"
 
-              sx={{
-                backgroundColor: "rgb(255, 85, 0)",
-                color: "rgb(250, 250, 250)",
-                width: "150px",
-                height: 50,
-                marginTop: 2,
-                textTransform: 'none',
-                fontWeight: 600,
-                fontSize: '16px',
-                "&:hover": {
-                  backgroundColor: "rgb(255, 168, 124)",
-                  color: "rgb(0, 0, 0)",
-                },
-              }}
-            >
-              Sign In
-            </Button>
+                  sx={{
+                    backgroundColor: "rgb(255, 85, 0)",
+                    color: "rgb(250, 250, 250)",
+                    width: "150px",
+                    height: 50,
+                    marginTop: 2,
+                    textTransform: 'none',
+                    fontWeight: 600,
+                    fontSize: '16px',
+                    "&:hover": {
+                      backgroundColor: "rgb(255, 168, 124)",
+                      color: "rgb(0, 0, 0)",
+                    },
+                  }}
+                >
+                  Sign In
+                </Button>}
+              {isLoading && <p>Sending request...</p>}
+              {error && <p>{error}</p>}
+            </div>
+            {isSuccessfullySubmitted && <div>Wysłano formularz</div>}
+            {isSubmitting && <div>Ogólnie wysłano formualrz</div>}
           </form>
           <Box
             sx={{
@@ -194,4 +211,5 @@ const SigninForm: React.FC = () => {
 };
 
 export default SigninForm;
+
 

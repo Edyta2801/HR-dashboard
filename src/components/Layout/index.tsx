@@ -7,7 +7,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Drawer from "@mui/material/Drawer";
 import Divider from "@mui/material/Divider";
 import { ROUTES } from "../../types/routes";
-import ErrorInfo from "../ErrorInfo";
+// import ErrorInfo from "../ErrorInfo";
 import Header from "../Header";
 import Navigation from "../Navigation";
 import Menu1Page from "../../pages/Menu1Page";
