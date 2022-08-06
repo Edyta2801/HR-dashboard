@@ -1,8 +1,8 @@
-import React from "react";
-import SignupForm from "../components/SignupForm";
+import React from 'react';
+import SignupForm from '../components/SignupForm';
 
-const SignupPage: React.FC = () => {
+function SignupPage() {
   return <SignupForm />;
-};
+}
 
 export default SignupPage;

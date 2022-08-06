@@ -1,10 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 const getStorageValue = <T>(key: string, defaultValue: T) => {
-  if (typeof window !== "undefined") {
-    const saved = localStorage.getItem(key);
-    return saved === null ? defaultValue : JSON.parse(saved);
-  }
+  // if (typeof window !== 'undefined') {
+  const saved = localStorage.getItem(key);
+  return saved === null ? defaultValue : JSON.parse(saved);
+  // }
 };
 
 export const useLocalStorage = (key: string, defaultValue: boolean) => {
