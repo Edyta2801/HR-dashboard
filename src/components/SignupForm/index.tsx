@@ -11,6 +11,7 @@ import { useForm } from 'react-hook-form';
 import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../api';
+import * as styles from './SignupForm.styles';
 
 function SignupForm() {
   const [isSuccessfullySubmitted, setIsSuccessfullySubmitted] = useState(false);
@@ -64,18 +65,10 @@ function SignupForm() {
   };
 
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        marginTop: 40,
-      }}
-    >
-      <Card sx={{ borderRadius: 3, minWidth: 500 }}>
+    <Box sx={styles.box}>
+      <Card sx={styles.card}>
         <CardContent>
-          <Typography sx={{ fontSize: 30, fontWeight: 500, marginBottom: 3 }}>
-            Enter Your Details
-          </Typography>
+          <Typography sx={styles.cardContent}>Enter Your Details</Typography>
           <form onSubmit={handleSubmit(handleLoginSubmit)}>
             <TextField
               fullWidth
@@ -227,23 +220,7 @@ function SignupForm() {
             </Typography>
             <div>
               {!isLoading && (
-                <Button
-                  type="submit"
-                  sx={{
-                    backgroundColor: 'rgb(255, 85, 0)',
-                    color: 'rgb(250, 250, 250)',
-                    width: '150px',
-                    height: 50,
-                    marginTop: 2,
-                    textTransform: 'none',
-                    fontWeight: 600,
-                    fontSize: '16px',
-                    '&:hover': {
-                      backgroundColor: 'rgb(255, 168, 124)',
-                      color: 'rgb(0, 0, 0)',
-                    },
-                  }}
-                >
+                <Button type="submit" sx={styles.button}>
                   Sign Up
                 </Button>
               )}
@@ -252,16 +229,8 @@ function SignupForm() {
             </div>
             {isSuccessfullySubmitted && <div>Wysłano formularz</div>}
           </form>
-          <Box
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              paddingTop: 3,
-            }}
-          >
-            <Typography sx={{ fontSize: 16, fontWeight: 200 }}>
-              Already Have An Account?
-            </Typography>
+          <Box sx={styles.linkContainer}>
+            <Typography sx={styles.text}>Already Have An Account?</Typography>
             <Link
               to="/signin"
               style={{

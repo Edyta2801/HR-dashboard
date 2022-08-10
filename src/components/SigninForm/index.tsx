@@ -14,6 +14,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLocalStorage } from '../../utils/useLocalStorage';
 import api from '../api';
+import * as styles from './SigninForm.styles';
 
 function SigninForm() {
   const [checked, setChecked] = useLocalStorage('checked', false);
@@ -71,18 +72,10 @@ function SigninForm() {
   };
 
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        marginTop: 40,
-      }}
-    >
-      <Card sx={{ borderRadius: 3, minWidth: 500 }}>
+    <Box sx={styles.box}>
+      <Card sx={styles.card}>
         <CardContent>
-          <Typography sx={{ fontSize: 30, fontWeight: 500, marginBottom: 3 }}>
-            User Sign In
-          </Typography>
+          <Typography sx={styles.cardContent}>User Sign In</Typography>
           <form onSubmit={handleSubmit(handleLoginSubmit)}>
             <TextField
               fullWidth
@@ -143,13 +136,7 @@ function SigninForm() {
             <Typography sx={{ color: 'red' }}>
               {errors.password?.message}
             </Typography>
-            <Box
-              sx={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-              }}
-            >
+            <Box sx={styles.boxFormControl}>
               <FormControlLabel
                 control={
                   <Checkbox
@@ -169,23 +156,7 @@ function SigninForm() {
             </Box>
             <div>
               {!isLoading && (
-                <Button
-                  type="submit"
-                  sx={{
-                    backgroundColor: 'rgb(255, 85, 0)',
-                    color: 'rgb(250, 250, 250)',
-                    width: '150px',
-                    height: 50,
-                    marginTop: 2,
-                    textTransform: 'none',
-                    fontWeight: 600,
-                    fontSize: '16px',
-                    '&:hover': {
-                      backgroundColor: 'rgb(255, 168, 124)',
-                      color: 'rgb(0, 0, 0)',
-                    },
-                  }}
-                >
+                <Button type="submit" sx={styles.button}>
                   Sign In
                 </Button>
               )}
@@ -195,14 +166,8 @@ function SigninForm() {
             {isSuccessfullySubmitted && <div>Wysłano formularz</div>}
             {isSubmitting && <div>Ogólnie wysłano formualrz</div>}
           </form>
-          <Box
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              paddingTop: 3,
-            }}
-          >
-            <Typography sx={{ fontSize: 16, fontWeight: 200 }}>
+          <Box sx={styles.linkContainer}>
+            <Typography sx={styles.text}>
               Don`&apos;`t have an account?
             </Typography>
             <Link

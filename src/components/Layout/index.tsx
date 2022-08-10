@@ -13,44 +13,26 @@ import Navigation from '../Navigation';
 import ProfilePage from '../../pages/ProfilePage';
 import DashboardPage from '../../pages/DashboardPage';
 import Menu2Page from '../../pages/Menu2Page';
+import * as styles from './Layout.styles';
 
 type LayoutProps = {
   children: React.ReactNode;
 };
 function Layout({ children }: LayoutProps) {
-  const initialWidth = 220;
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={styles.box}>
       {children}
       <CssBaseline />
-      <AppBar
-        position="fixed"
-        sx={{
-          width: `calc(100% - ${initialWidth}px)`,
-        }}
-      >
+      <AppBar sx={styles.appBar}>
         <Header />
       </AppBar>
 
-      <Drawer
-        sx={{
-          flexShrink: 0,
-          '& .MuiDrawer-paper': {
-            width: initialWidth,
-            boxSizing: 'border-box',
-          },
-        }}
-        variant="permanent"
-        anchor="left"
-      >
+      <Drawer sx={styles.drawer} variant="permanent" anchor="left">
         <Toolbar />
         <Divider />
         <Navigation />
       </Drawer>
-      <Box
-        component="main"
-        sx={{ flexGrow: 1, bgcolor: 'background.default', p: 2 }}
-      >
+      <Box component="main" sx={styles.main}>
         <Routes>
           <Route path={ROUTES.PROFILE} element={<ProfilePage />} />
           <Route path={ROUTES.MENU2} element={<Menu2Page />} />
