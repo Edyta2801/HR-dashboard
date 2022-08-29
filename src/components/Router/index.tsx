@@ -1,5 +1,5 @@
-import React from 'react';
 import { Route, Routes } from 'react-router-dom';
+import CenteredLayout from 'components/centeredLayout/CenteredLayout';
 import Signin from '../../pages/SigninPage';
 import { ROUTES } from '../../types/routes';
 import Home from '../../pages/HomePage';
@@ -12,9 +12,11 @@ import ProfilePage from '../../pages/ProfilePage';
 function Router() {
   return (
     <Routes>
-      <Route path={ROUTES.HOME} element={<Home />} />
-      <Route path={ROUTES.SIGNIN} element={<Signin />} />
-      <Route path={ROUTES.SIGNUP} element={<Signup />} />
+      <Route element={<CenteredLayout />}>
+        <Route path={ROUTES.HOME} element={<Home />} />
+        <Route path={ROUTES.SIGNIN} element={<Signin />} />
+        <Route path={ROUTES.SIGNUP} element={<Signup />} />
+      </Route>
       <Route
         path={ROUTES.DASHBOARD}
         element={

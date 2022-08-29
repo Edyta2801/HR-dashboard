@@ -3,7 +3,6 @@ import { SxProps, Theme } from '@mui/material';
 export const box: SxProps<Theme> = {
   display: 'flex',
   justifyContent: 'center',
-  marginTop: 40,
 };
 export const card: SxProps<Theme> = {
   borderRadius: 3,

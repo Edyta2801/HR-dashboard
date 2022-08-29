@@ -3,7 +3,6 @@ import { Styles } from 'theme/theme';
 export const box: Styles = {
   display: 'flex',
   justifyContent: 'center',
-  marginTop: 40,
 };
 export const card: Styles = {
   borderRadius: 3,
