@@ -1,16 +1,16 @@
-import { SxProps, Theme } from '@mui/material';
+import { Styles } from 'theme/theme';
 
-export const box: SxProps<Theme> = {
+export const box: Styles = {
   display: 'flex',
 };
 
 const initialWidth = 220;
-export const appBar: SxProps<Theme> = {
+export const appBar: Styles = {
   position: 'fixed',
   width: `calc(100% - ${initialWidth}px)`,
 };
 
-export const drawer: SxProps<Theme> = {
+export const drawer: Styles = {
   flexShrink: 0,
   '& .MuiDrawer-paper': {
     width: initialWidth,
@@ -18,7 +18,7 @@ export const drawer: SxProps<Theme> = {
   },
 };
 
-export const main: SxProps<Theme> = {
+export const main: Styles = {
   flexGrow: 1,
   bgcolor: 'background.default',
   p: 2,

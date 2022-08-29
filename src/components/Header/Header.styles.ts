@@ -1,6 +1,6 @@
-import { SxProps, Theme } from '@mui/material';
+import { Styles } from 'theme/theme';
 
-export const box: SxProps<Theme> = {
+export const box: Styles = {
   display: 'flex',
   justifyContent: 'end',
   margin: 3,
