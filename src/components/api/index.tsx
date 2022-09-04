@@ -1,13 +1,21 @@
 import axios from 'axios';
-import { CONSTANTS } from '../../types/constants';
+// import { CONSTANTS } from '../../types/constants';
 
-const token = window.localStorage.getItem('access_token');
+// const token = window.localStorage.getItem('access_token');
+const API_URL = 'http://localhost:9595/app';
+// const API_KEY = window.localStorage.getItem('access_token');
+const API_KEY = `Bearer ${process.env.REACT_APP_API_KEY}`;
 
 const axiosInstance = axios.create({
-  baseURL: `${CONSTANTS.URL}`,
+  // baseURL: `${CONSTANTS.URL}`,
+  // baseURL: API_URL,
+  baseURL: API_URL,
   headers: {
     'Content-Type': 'application/json',
-    Authorization: `Bearer ${token}`,
+    // Authorization: `Bearer ${process.env.REACT_APP}`,
+    // Authorization: `Bearer ${API_KEY}`,
+    // Authorization: `Bearer ${token}`,
+    Authorization: API_KEY,
   },
   responseType: 'json',
 });
@@ -23,7 +31,7 @@ const api = {
     username: string,
     password: string,
   ) {
-    return axiosInstance.post('/auth/register', {
+    return axiosInstance.post('/app/auth/register', {
       firstname,
       lastname,
       username,
@@ -32,7 +40,7 @@ const api = {
   },
 
   getProfile() {
-    return axiosInstance.get('/profile');
+    return axiosInstance.get('/app/profile');
   },
 };
 

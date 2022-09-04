@@ -17,10 +17,11 @@ import api from '../api';
 import * as styles from './SigninForm.styles';
 
 function SigninForm() {
-  const [checked, setChecked] = useLocalStorage('checked', false);
+  // const [checked, setChecked] = useLocalStorage('checked', false);
+  const [checked, setChecked] = useState(false);
   const [isSuccessfullySubmitted, setIsSuccessfullySubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState<string>('');
   const navigate = useNavigate();
 
   const {
@@ -46,17 +47,18 @@ function SigninForm() {
     return api
       .login(values.username, values.password)
       .then((result: any) => {
+        setError('');
+        setIsLoading(true);
         console.log('access_token', result.data.access_token);
         setIsSuccessfullySubmitted(result.status === 200);
         localStorage.setItem('access_token', result.data.access_token);
-        setError('');
         navigate('/dashboard');
         reset();
       })
       .catch(() => {
         setError('Błędne dane logowania');
-        reset();
         setIsLoading(false);
+        reset();
       });
   };
 
@@ -141,7 +143,8 @@ function SigninForm() {
                 control={
                   <Checkbox
                     checked={checked}
-                    onChange={handleChange}
+                    // onChange={handleChange}
+                    onChange={(e) => setChecked(e.target.checked)}
                     color="default"
                   />
                 }
@@ -156,20 +159,18 @@ function SigninForm() {
             </Box>
             <div>
               {!isLoading && (
-                <Button type="submit" sx={styles.button}>
+                <Button type="submit" sx={styles.button} disabled={isLoading}>
                   Sign In
                 </Button>
               )}
               {isLoading && <p>Sending request...</p>}
-              {error && <p>{error}</p>}
+              {error && <Typography color="error">{error}</Typography>}
             </div>
             {isSuccessfullySubmitted && <div>Wysłano formularz</div>}
-            {isSubmitting && <div>Ogólnie wysłano formualrz</div>}
+            {isSubmitting && <div>Wysyłanie formularza....</div>}
           </form>
           <Box sx={styles.linkContainer}>
-            <Typography sx={styles.text}>
-              Don`&apos;`t have an account?
-            </Typography>
+            <Typography sx={styles.text}>Don{`'`}t have an account?</Typography>
             <Link
               to="/signup"
               style={{
