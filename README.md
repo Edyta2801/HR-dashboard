@@ -1,5 +1,5 @@
 ## HR Dashboard _in progress_
-> Live demo [_here_](https://www.example.com). <!-- If you have the project hosted somewhere, include the link here. -->
+<!-- If you have the project hosted somewhere, include the link here. -->
 
 ## Table of Contents
 * [General Info](#general-information)
@@ -31,6 +31,9 @@
 ## Screenshots
 ![Example screenshot](./src/img/main.png)
 ![Example screenshot](./src/img/signIn.png)
+![Example screenshot](./src/img/dashboard_1.png)
+![Example screenshot](./src/img/dashboard_2.png)
+![Example screenshot](./src/img/dashboard_3.png)
 <!-- If you have screenshots you'd like to share, include them here. -->
 
 
