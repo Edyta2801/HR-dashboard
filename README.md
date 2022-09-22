@@ -1,3 +1,40 @@
+## HR Dashboard _in progress_
+> Live demo [_here_](https://www.example.com). <!-- If you have the project hosted somewhere, include the link here. -->
+
+## Table of Contents
+* [General Info](#general-information)
+* [Technologies Used](#technologies-used)
+* [Screenshots](#screenshots)
+* [Setup](#setup)
+<!-- * [License](#license) -->
+
+
+## General Information
+- CRM for recruiters
+- Home page with statistics
+- Jobs page with positions (functionalites: seach, delete, add, edit)
+- Candidates page in the form of a table and the same functionalites as Jobs page
+- Login panel with token storage
+<!-- You don't have to answer all the questions - just the ones relevant to your project. -->
+
+
+## Technologies Used
+- React (Hooks)
+- TypeScript
+- Mui
+- Axios
+- testing-libreary
+- Jest
+- msw
+
+
+## Screenshots
+![Example screenshot](./src/img/main.png)
+![Example screenshot](./src/img/signIn.png)
+<!-- If you have screenshots you'd like to share, include them here. -->
+
+
+## Setup
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
