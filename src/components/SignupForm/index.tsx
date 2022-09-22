@@ -5,54 +5,71 @@ import {
   Button,
   TextField,
   Box,
-} from "@mui/material";
-import { Link } from "react-router-dom";
-import { useForm } from "react-hook-form";
-import React, { useRef } from "react";
+} from '@mui/material';
+import { Link } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import React, { useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import api from '../api';
+import * as styles from './SignupForm.styles';
 
-
-type Inputs = {
-  firstName: string,
-  lastName: string,
-  email: string,
-  password: string,
-  retypePassword: string
-};
-
-const SignupForm: React.FC = () => {
-
+function SignupForm() {
+  const [isSuccessfullySubmitted, setIsSuccessfullySubmitted] = useState(false);
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     watch,
     reset,
     formState: { errors },
-  } = useForm<Inputs>();
+  } = useForm({
+    defaultValues: {
+      firstname: '',
+      lastname: '',
+      username: '',
+      password: '',
+      retypepassword: '',
+    },
+  });
 
   const password = useRef({});
-  password.current = watch("password", "");
+  password.current = watch('password', '');
 
-
-
-  const handleLoginSubmit = (data: Inputs) => {
-    console.log(data);
-    reset();
+  const handleLoginSubmit = (values: {
+    firstname: string;
+    lastname: string;
+    username: string;
+    password: string;
+  }) => {
+    return api
+      .register(
+        values.firstname,
+        values.lastname,
+        values.username,
+        values.password,
+      )
+      .then((result: any) => {
+        console.log('result', result.data);
+        setIsSuccessfullySubmitted(result.status === 200);
+        setError('');
+        navigate('/dashboard');
+        reset();
+      })
+      .catch(() => {
+        setError('Błędne dane logowania');
+        reset();
+        setIsLoading(false);
+      });
   };
 
   return (
-    <Box sx={{
-      display: 'flex',
-      justifyContent: 'center',
-      marginTop: 40
-    }}>
-      <Card
-        sx={{ borderRadius: 3, minWidth: 500 }}>
+    <Box sx={styles.box}>
+      <Card sx={styles.card}>
         <CardContent>
-          <Typography sx={{ fontSize: 30, fontWeight: 500, marginBottom: 3 }}>
-           Enter Your Details
-          </Typography>
+          <Typography sx={styles.cardContent}>Enter Your Details</Typography>
           <form onSubmit={handleSubmit(handleLoginSubmit)}>
-
             <TextField
               fullWidth
               type="firstName"
@@ -65,21 +82,21 @@ const SignupForm: React.FC = () => {
                 },
               }}
               sx={{
-                borderBottom: errors.firstName
-                  ? "1px solid rgb(250, 0, 0)"
-                  : "1px solid  rgb(118,118,118)",
+                borderBottom: errors.firstname
+                  ? '1px solid rgb(250, 0, 0)'
+                  : '1px solid  rgb(118,118,118)',
                 marginBottom: 1,
               }}
-              {...register("firstName", {
-                required: "Please fulfill marked fields.",
+              {...register('firstname', {
+                required: 'Please fulfill marked fields.',
                 minLength: {
-                  value: 5,
-                  message: "Minimum length is 5",
+                  value: 4,
+                  message: 'Minimum length is 4',
                 },
               })}
-            ></TextField>
+            />
             <Typography sx={{ color: 'red' }}>
-              {errors.firstName?.message}
+              {errors.firstname?.message}
             </Typography>
 
             <TextField
@@ -94,21 +111,21 @@ const SignupForm: React.FC = () => {
                 },
               }}
               sx={{
-                borderBottom: errors.lastName
-                  ? "1px solid rgb(250, 0, 0)"
-                  : "1px solid  rgb(118,118,118)",
+                borderBottom: errors.lastname
+                  ? '1px solid rgb(250, 0, 0)'
+                  : '1px solid  rgb(118,118,118)',
                 marginBottom: 1,
               }}
-              {...register("lastName", {
-                required: "Please fulfill marked fields.",
+              {...register('lastname', {
+                required: 'Please fulfill marked fields.',
                 minLength: {
-                  value: 5,
-                  message: "Minimum length is 5",
+                  value: 1,
+                  message: 'Minimum length is 1',
                 },
               })}
-            ></TextField>
+            />
             <Typography sx={{ color: 'red' }}>
-              {errors.lastName?.message}
+              {errors.lastname?.message}
             </Typography>
 
             <TextField
@@ -116,7 +133,6 @@ const SignupForm: React.FC = () => {
               variant="standard"
               autoComplete="username"
               placeholder="Email *"
-
               InputProps={{
                 disableUnderline: true,
                 style: {
@@ -124,21 +140,22 @@ const SignupForm: React.FC = () => {
                 },
               }}
               sx={{
-                borderBottom: errors.email
-                  ? "1px solid rgb(250, 0, 0)"
-                  : "1px solid rgb(118,118,118)",
+                borderBottom: errors.username
+                  ? '1px solid rgb(250, 0, 0)'
+                  : '1px solid rgb(118,118,118)',
                 marginBottom: 1,
               }}
-              {...register("email", {
-                required: "Please fulfill marked fields.",
+              {...register('username', {
+                required: 'Please fulfill marked fields.',
                 pattern: {
                   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: "Invalid email address",
+                  message: 'Invalid email address',
                 },
               })}
-            ></TextField>
+            />
             <Typography sx={{ color: 'red' }}>
-              {errors.email?.message}</Typography>
+              {errors.username?.message}
+            </Typography>
 
             <TextField
               fullWidth
@@ -154,18 +171,18 @@ const SignupForm: React.FC = () => {
               }}
               sx={{
                 borderBottom: errors.password
-                  ? "1px solid rgb(250, 0, 0)"
-                  : "1px solid  rgb(118,118,118)",
+                  ? '1px solid rgb(250, 0, 0)'
+                  : '1px solid  rgb(118,118,118)',
                 marginBottom: 1,
               }}
-              {...register("password", {
-                required: "Please fulfill marked fields.",
+              {...register('password', {
+                required: 'Please fulfill marked fields.',
                 minLength: {
-                  value: 8,
-                  message: "Minimum length is 8",
+                  value: 5,
+                  message: 'Minimum length is 5',
                 },
               })}
-            ></TextField>
+            />
             <Typography sx={{ color: 'red' }}>
               {errors.password?.message}
             </Typography>
@@ -183,58 +200,44 @@ const SignupForm: React.FC = () => {
                 },
               }}
               sx={{
-                borderBottom: errors.retypePassword
-                  ? "1px solid rgb(250, 0, 0)"
-                  : "1px solid  rgb(118,118,118)",
+                borderBottom: errors.retypepassword
+                  ? '1px solid rgb(250, 0, 0)'
+                  : '1px solid  rgb(118,118,118)',
                 marginBottom: 1,
               }}
-              {...register("retypePassword", {
-                required: "Please fulfill marked fields.",
+              {...register('retypepassword', {
+                required: 'Please fulfill marked fields.',
                 minLength: {
-                  value: 8,
-                  message: "Minimum length is 8",
+                  value: 5,
+                  message: 'Minimum length is 5',
                 },
-                validate: value =>
-                  value === password.current || "The passwords do not match"
+                validate: (value) =>
+                  value === password.current || 'The passwords do not match',
               })}
-            ></TextField>
+            />
             <Typography sx={{ color: 'red' }}>
-              {errors.retypePassword?.message}
+              {errors.retypepassword?.message}
             </Typography>
-
-            <Button
-              type="submit"
-
-              sx={{
-                backgroundColor: "rgb(255, 85, 0)",
-                color: "rgb(250, 250, 250)",
-                width: "150px",
-                height: 50,
-                marginTop: 2,
-                textTransform: 'none',
-                fontWeight: 600,
-                fontSize: '16px',
-                "&:hover": {
-                  backgroundColor: "rgb(255, 168, 124)",
-                  color: "rgb(0, 0, 0)",
-                },
-              }}
-            >
-              Sign Up
-            </Button>
+            <div>
+              {!isLoading && (
+                <Button type="submit" sx={styles.button}>
+                  Sign Up
+                </Button>
+              )}
+              {isLoading && <p>Sending request...</p>}
+              {error && <p>{error}</p>}
+            </div>
+            {isSuccessfullySubmitted && <div>Wysłano formularz</div>}
           </form>
-          <Box
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              paddingTop: 3
-            }}
-          >
-            <Typography sx={{ fontSize: 16, fontWeight: 200 }}>
-              Already Have An Account?
-            </Typography>
-            <Link to="/signin"
-              style={{ color: "#1565c0", textDecoration: 'none', paddingLeft: 10 }}
+          <Box sx={styles.linkContainer}>
+            <Typography sx={styles.text}>Already Have An Account?</Typography>
+            <Link
+              to="/signin"
+              style={{
+                color: '#1565c0',
+                textDecoration: 'none',
+                paddingLeft: 10,
+              }}
             >
               Then Sign In
             </Link>
@@ -243,7 +246,6 @@ const SignupForm: React.FC = () => {
       </Card>
     </Box>
   );
-};
+}
 
 export default SignupForm;
-

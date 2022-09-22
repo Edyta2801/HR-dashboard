@@ -1,12 +1,12 @@
 import React from 'react';
-import { Box, Typography } from "@mui/material";
-import NavBarContainer from "../NavBarContainer";
-
+import { Box, Typography } from '@mui/material';
+import NavBarContainer from '../NavBarContainer';
+import * as styles from './Header.styles';
 
 function Header() {
   return (
     <NavBarContainer>
-      <Box sx={{ display: 'flex', justifyContent: 'end',margin:3 }}>
+      <Box sx={styles.box}>
         <Typography>login</Typography>
       </Box>
     </NavBarContainer>

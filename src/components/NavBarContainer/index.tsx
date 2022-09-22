@@ -1,11 +1,11 @@
-import Box from "@mui/material/Box";
-import React from "react";
+import Box from '@mui/material/Box';
+import React from 'react';
 
-interface NavBarContainerProps {
-  children?: React.ReactNode;
-}
-
-const NavBarContainer: React.FC<NavBarContainerProps> = (props) => {
-  return <Box>{props.children}</Box>;
+type NavBarContainerProps = {
+  children: React.ReactNode;
 };
+
+function NavBarContainer({ children }: NavBarContainerProps) {
+  return <Box>{children}</Box>;
+}
 export default NavBarContainer;
