@@ -12,12 +12,10 @@ import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useLocalStorage } from '../../utils/useLocalStorage';
 import api from '../api';
 import * as styles from './SigninForm.styles';
 
 function SigninForm() {
-  // const [checked, setChecked] = useLocalStorage('checked', false);
   const [checked, setChecked] = useState(false);
   const [isSuccessfullySubmitted, setIsSuccessfullySubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -143,7 +141,6 @@ function SigninForm() {
                 control={
                   <Checkbox
                     checked={checked}
-                    // onChange={handleChange}
                     onChange={(e) => setChecked(e.target.checked)}
                     color="default"
                   />
