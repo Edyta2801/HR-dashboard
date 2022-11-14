@@ -10,79 +10,34 @@ import {
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import api from '../api';
+import { useState } from 'react';
+import { SignInPayload } from 'components/api/login/login.types';
+import { emailRegex } from 'utils/emailRegex';
+import { ROUTES } from 'types/routes';
+import { useLogin } from '../api/login/useLogin';
 import * as styles from './SigninForm.styles';
 
 function SigninForm() {
   const [checked, setChecked] = useState(false);
-  const [isSuccessfullySubmitted, setIsSuccessfullySubmitted] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string>('');
-  const navigate = useNavigate();
+  const { loginState, onMutate } = useLogin();
 
   const {
-    register,
+    formState: { errors },
     handleSubmit,
-    watch,
-    reset,
-    formState: { errors, isSubmitting },
-  } = useForm({
-    defaultValues: {
-      username: '',
-      password: '',
-    },
-  });
-
-  const currentPassword = watch('password', '');
-  const currentUsername = watch('username', '');
-
-  const handleLoginSubmit = (values: {
-    username: string;
-    password: string;
-  }) => {
-    return api
-      .login(values.username, values.password)
-      .then((result: any) => {
-        setError('');
-        setIsLoading(true);
-        console.log('access_token', result.data.access_token);
-        setIsSuccessfullySubmitted(result.status === 200);
-        localStorage.setItem('access_token', result.data.access_token);
-        navigate('/dashboard');
-        reset();
-      })
-      .catch(() => {
-        setError('Błędne dane logowania');
-        setIsLoading(false);
-        reset();
-      });
-  };
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setChecked(event.target.checked);
-    console.log(event.target.checked);
-    const data = [currentUsername, currentPassword];
-    console.log(data);
-
-    if (currentUsername !== '' && currentPassword !== '') {
-      localStorage.setItem('data', JSON.stringify(data));
-    }
-  };
+    register,
+  } = useForm<SignInPayload>();
 
   return (
     <Box sx={styles.box}>
       <Card sx={styles.card}>
         <CardContent>
           <Typography sx={styles.cardContent}>User Sign In</Typography>
-          <form onSubmit={handleSubmit(handleLoginSubmit)}>
+          <form onSubmit={handleSubmit(onMutate)}>
             <TextField
               fullWidth
               variant="standard"
               autoComplete="username"
               placeholder="username *"
-              disabled={isSubmitting}
               InputProps={{
                 disableUnderline: true,
                 style: {
@@ -98,7 +53,7 @@ function SigninForm() {
               {...register('username', {
                 required: 'Please fulfill marked fields.',
                 pattern: {
-                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  value: emailRegex,
                   message: 'Invalid email address',
                 },
               })}
@@ -112,7 +67,6 @@ function SigninForm() {
               variant="standard"
               autoComplete="new-password"
               placeholder="Password *"
-              disabled={isSubmitting}
               InputProps={{
                 disableUnderline: true,
                 style: {
@@ -148,28 +102,32 @@ function SigninForm() {
                 label="Remember Me"
               />
               <Link
-                to="signup"
+                to={ROUTES.SIGNUP}
                 style={{ color: '#1565c0', textDecoration: 'none' }}
               >
                 Forgot Password?
               </Link>
             </Box>
             <div>
-              {!isLoading && (
-                <Button type="submit" sx={styles.button} disabled={isLoading}>
+              {!loginState.isLoading && (
+                <Button
+                  type="submit"
+                  sx={styles.button}
+                  disabled={loginState.isLoading}
+                >
                   Sign In
                 </Button>
               )}
-              {isLoading && <p>Sending request...</p>}
-              {error && <Typography color="error">{error}</Typography>}
+              {loginState.isLoading && <p>Sending request...</p>}
+              {loginState.errorMessage && (
+                <Typography color="error">{loginState.errorMessage}</Typography>
+              )}
             </div>
-            {isSuccessfullySubmitted && <div>Wysłano formularz</div>}
-            {isSubmitting && <div>Wysyłanie formularza....</div>}
           </form>
           <Box sx={styles.linkContainer}>
             <Typography sx={styles.text}>Don{`'`}t have an account?</Typography>
             <Link
-              to="/signup"
+              to={ROUTES.SIGNUP}
               style={{
                 color: '#1565c0',
                 textDecoration: 'none',

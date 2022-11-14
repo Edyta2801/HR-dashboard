@@ -1,4 +1,9 @@
 module.exports = {
+  env: {
+    browser: true,
+    node: true,
+    jest: true,
+  },
   parser: '@typescript-eslint/parser',
   parserOptions: {
     project: './tsconfig.json',
@@ -27,11 +32,7 @@ module.exports = {
     'plugin:prettier/recommended',
   ],
   root: true,
-  env: {
-    browser: true,
-    node: true,
-    jest: true,
-  },
+
   ignorePatterns: [
     '**/*.js',
     '**/*.json',
