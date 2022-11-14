@@ -11,15 +11,19 @@ import {
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
-import { SignInPayload } from 'components/api/login/login.types';
+import { SignInPayload } from 'components/api/useMutation/login.types';
 import { emailRegex } from 'utils/emailRegex';
 import { ROUTES } from 'types/routes';
-import { useLogin } from '../api/login/useLogin';
+import { useMutation } from '../api/useMutation/useMutation';
 import * as styles from './SigninForm.styles';
+import axios from '../api/axios';
 
 function SigninForm() {
   const [checked, setChecked] = useState(false);
-  const { loginState, onMutate } = useLogin();
+  const { state, onMutate } = useMutation({
+    mutateFn: (payload: SignInPayload) =>
+      axios.post('/app/auth/login', payload),
+  });
 
   const {
     formState: { errors },
@@ -109,18 +113,18 @@ function SigninForm() {
               </Link>
             </Box>
             <div>
-              {!loginState.isLoading && (
+              {!state.isLoading && (
                 <Button
                   type="submit"
                   sx={styles.button}
-                  disabled={loginState.isLoading}
+                  disabled={state.isLoading}
                 >
                   Sign In
                 </Button>
               )}
-              {loginState.isLoading && <p>Sending request...</p>}
-              {loginState.errorMessage && (
-                <Typography color="error">{loginState.errorMessage}</Typography>
+              {state.isLoading && <p>Sending request...</p>}
+              {state.errorMessage && (
+                <Typography color="error">{state.errorMessage}</Typography>
               )}
             </div>
           </form>
