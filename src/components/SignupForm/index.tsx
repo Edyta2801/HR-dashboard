@@ -5,71 +5,49 @@ import {
   Button,
   TextField,
   Box,
+  CircularProgress,
 } from '@mui/material';
+import { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import React, { useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import api from '../api';
+import { ROUTES } from 'types/routes';
+import { useMutation } from 'components/api/useMutation/useMutation';
+import { emailRegex } from 'utils/emailRegex';
+import { SignUpPayload } from './SignUp.types';
+import axios from '../api/axios';
+
 import * as styles from './SignupForm.styles';
 
 function SignupForm() {
-  const [isSuccessfullySubmitted, setIsSuccessfullySubmitted] = useState(false);
-  const [error, setError] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();
-  const {
-    register,
-    handleSubmit,
-    watch,
-    reset,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {
-      firstname: '',
-      lastname: '',
-      username: '',
-      password: '',
-      retypepassword: '',
-    },
+  const { state, onMutate } = useMutation({
+    mutateFn: (payload: Omit<SignUpPayload, 'passwordRepeat'>) =>
+      axios.post('/app/auth/register', payload),
   });
 
-  const password = useRef({});
-  password.current = watch('password', '');
+  const {
+    watch,
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<SignUpPayload>();
 
-  const handleLoginSubmit = (values: {
-    firstname: string;
-    lastname: string;
-    username: string;
-    password: string;
-  }) => {
-    return api
-      .register(
-        values.firstname,
-        values.lastname,
-        values.username,
-        values.password,
-      )
-      .then((result: any) => {
-        console.log('result', result.data);
-        setIsSuccessfullySubmitted(result.status === 200);
-        setError('');
-        navigate('/dashboard');
-        reset();
-      })
-      .catch(() => {
-        setError('Błędne dane logowania');
-        reset();
-        setIsLoading(false);
-      });
-  };
+  const watchedPassword = watch('password');
+  console.log(watchedPassword);
+
+  const handleMutate = useCallback(
+    async (payload: SignUpPayload) => {
+      const { passwordRepeat, ...validApiPayload } = payload;
+      onMutate(validApiPayload);
+    },
+    [onMutate],
+  );
 
   return (
     <Box sx={styles.box}>
       <Card sx={styles.card}>
         <CardContent>
           <Typography sx={styles.cardContent}>Enter Your Details</Typography>
-          <form onSubmit={handleSubmit(handleLoginSubmit)}>
+          <form onSubmit={handleSubmit(handleMutate)}>
             <TextField
               fullWidth
               type="firstName"
@@ -82,7 +60,7 @@ function SignupForm() {
                 },
               }}
               sx={{
-                borderBottom: errors.firstname
+                borderBottom: !errors.firstname
                   ? '1px solid rgb(250, 0, 0)'
                   : '1px solid  rgb(118,118,118)',
                 marginBottom: 1,
@@ -90,10 +68,12 @@ function SignupForm() {
               {...register('firstname', {
                 required: 'Please fulfill marked fields.',
                 minLength: {
-                  value: 4,
-                  message: 'Minimum length is 4',
+                  value: 3,
+                  message: 'Minimum length is 3',
                 },
               })}
+              error={!errors.firstname}
+              helperText={errors.firstname?.message}
             />
             <Typography sx={{ color: 'red' }}>
               {errors.firstname?.message}
@@ -111,7 +91,7 @@ function SignupForm() {
                 },
               }}
               sx={{
-                borderBottom: errors.lastname
+                borderBottom: !errors.lastname
                   ? '1px solid rgb(250, 0, 0)'
                   : '1px solid  rgb(118,118,118)',
                 marginBottom: 1,
@@ -140,7 +120,7 @@ function SignupForm() {
                 },
               }}
               sx={{
-                borderBottom: errors.username
+                borderBottom: !errors.username
                   ? '1px solid rgb(250, 0, 0)'
                   : '1px solid rgb(118,118,118)',
                 marginBottom: 1,
@@ -148,7 +128,7 @@ function SignupForm() {
               {...register('username', {
                 required: 'Please fulfill marked fields.',
                 pattern: {
-                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  value: emailRegex,
                   message: 'Invalid email address',
                 },
               })}
@@ -170,7 +150,7 @@ function SignupForm() {
                 },
               }}
               sx={{
-                borderBottom: errors.password
+                borderBottom: !errors.password
                   ? '1px solid rgb(250, 0, 0)'
                   : '1px solid  rgb(118,118,118)',
                 marginBottom: 1,
@@ -178,8 +158,8 @@ function SignupForm() {
               {...register('password', {
                 required: 'Please fulfill marked fields.',
                 minLength: {
-                  value: 5,
-                  message: 'Minimum length is 5',
+                  value: 3,
+                  message: 'Minimum length is 3',
                 },
               })}
             />
@@ -200,39 +180,46 @@ function SignupForm() {
                 },
               }}
               sx={{
-                borderBottom: errors.retypepassword
+                borderBottom: !errors.passwordRepeat
                   ? '1px solid rgb(250, 0, 0)'
                   : '1px solid  rgb(118,118,118)',
                 marginBottom: 1,
               }}
-              {...register('retypepassword', {
+              {...register('passwordRepeat', {
                 required: 'Please fulfill marked fields.',
                 minLength: {
-                  value: 5,
-                  message: 'Minimum length is 5',
+                  value: 3,
+                  message: 'Minimum length is 3',
                 },
                 validate: (value) =>
-                  value === password.current || 'The passwords do not match',
+                  value === watchedPassword || 'The passwords do not match',
               })}
             />
             <Typography sx={{ color: 'red' }}>
-              {errors.retypepassword?.message}
+              {errors.passwordRepeat?.message}
             </Typography>
-            <div>
-              {!isLoading && (
-                <Button type="submit" sx={styles.button}>
-                  Sign Up
-                </Button>
+
+            {state.errorMessage && (
+              <Typography sx={{ color: 'red' }}>
+                {state.errorMessage}
+              </Typography>
+            )}
+
+            <Button
+              type="submit"
+              variant="contained"
+              disabled={state.isLoading}
+            >
+              {!state.isLoading && 'SIGN UP'}
+              {state.isLoading && (
+                <CircularProgress color="inherit" size={24} />
               )}
-              {isLoading && <p>Sending request...</p>}
-              {error && <p>{error}</p>}
-            </div>
-            {isSuccessfullySubmitted && <div>Wysłano formularz</div>}
+            </Button>
           </form>
           <Box sx={styles.linkContainer}>
             <Typography sx={styles.text}>Already Have An Account?</Typography>
             <Link
-              to="/signin"
+              to={ROUTES.SIGNIN}
               style={{
                 color: '#1565c0',
                 textDecoration: 'none',
