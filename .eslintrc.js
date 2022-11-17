@@ -51,4 +51,13 @@ module.exports = {
     'prettier/prettier': 'error',
     'react/jsx-props-no-spreading': 'off',
   },
+  overrides: [
+    {
+      env: {
+        jest: true,
+      },
+      files: ['**/?(*.)+(test).ts?(x)'],
+      extends: ['plugin:testing-library/react', 'plugin:jest/recommended'],
+    },
+  ],
 };

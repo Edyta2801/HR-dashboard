@@ -230,6 +230,7 @@ function SignupForm() {
             </Link>
           </Box>
         </CardContent>
+        +
       </Card>
     </Box>
   );
