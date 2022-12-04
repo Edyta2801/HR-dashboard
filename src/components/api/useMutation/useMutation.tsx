@@ -34,7 +34,7 @@ export const useMutation = <T extends Record<never, never>>({
         dispatch({ type: 'finish' });
       }
     },
-    [mutateFn],
+    [mutateFn, onSuccess],
   );
   return { onMutate, state };
 };
