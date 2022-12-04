@@ -8,9 +8,9 @@ import {
   FormControlLabel,
   Box,
 } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { SignInPayload } from 'components/SigninForm/SignIn.types';
 import { emailRegex } from 'utils/emailRegex';
 import { ROUTES } from 'types/routes';
@@ -20,9 +20,17 @@ import axios from '../api/axios';
 
 function SigninForm() {
   const [checked, setChecked] = useState(false);
+
+  const navigate = useNavigate();
+
+  const onSuccess = useCallback(() => {
+    navigate(ROUTES.DASHBOARD);
+  }, [navigate]);
+
   const { state, onMutate } = useMutation({
     mutateFn: (payload: SignInPayload) =>
       axios.post('/app/auth/login', payload),
+    onSuccess,
   });
 
   const {
@@ -40,8 +48,8 @@ function SigninForm() {
             <TextField
               fullWidth
               variant="standard"
-              autoComplete="username"
-              placeholder="username *"
+              autoComplete="Username"
+              placeholder="Username *"
               InputProps={{
                 disableUnderline: true,
                 style: {

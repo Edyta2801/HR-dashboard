@@ -1,15 +1,14 @@
 import { useCallback, useReducer } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { ROUTES } from 'types/routes';
+
 import { isAxiosError } from '../axios';
 import { defaultState, mutationReducer } from './mutationReducer';
 import { UseMutationProps } from './useMutation.types';
 
 export const useMutation = <T extends Record<never, never>>({
   mutateFn,
+  onSuccess,
 }: UseMutationProps<T>) => {
   const [state, dispatch] = useReducer(mutationReducer, defaultState);
-  const navigate = useNavigate();
 
   const onMutate = useCallback(
     async (payload: T) => {
@@ -17,7 +16,7 @@ export const useMutation = <T extends Record<never, never>>({
         dispatch({ type: 'init' });
         // await axios.post('/app/auth/login', payload);
         await mutateFn(payload);
-        navigate(ROUTES.DASHBOARD);
+        if (onSuccess) onSuccess();
       } catch (error) {
         if (isAxiosError(error) && error.response?.status === 401) {
           dispatch({
@@ -35,7 +34,7 @@ export const useMutation = <T extends Record<never, never>>({
         dispatch({ type: 'finish' });
       }
     },
-    [mutateFn, navigate],
+    [mutateFn],
   );
   return { onMutate, state };
 };
