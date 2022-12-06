@@ -24,6 +24,7 @@ function SigninForm() {
   const navigate = useNavigate();
 
   const onSuccess = useCallback(() => {
+    console.log('onSuccess');
     navigate(ROUTES.DASHBOARD);
   }, [navigate]);
 

@@ -1,5 +1,7 @@
 import userEvent from '@testing-library/user-event';
+import { act } from 'react-dom/test-utils';
 import { render, screen } from 'tests';
+import { ROUTES } from 'types/routes';
 import SigninForm from '.';
 
 const mockNavigate = jest.fn();
@@ -10,6 +12,10 @@ jest.mock('react-router-dom', () => ({
 }));
 
 describe('Signin', () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   it('renders', () => {
     expect('signin').toBeInTheDocument;
   });
@@ -41,12 +47,13 @@ describe('Signin', () => {
     const passwordField = screen.getByPlaceholderText(/Password */);
     const submitButton = screen.getByRole('button');
 
-    await userEvent.type(emailField, 'user@example.com');
-    await userEvent.type(passwordField, 'password123');
-    await userEvent.click(submitButton);
+    await act(async () => userEvent.type(emailField, 'user@example.com'));
+    await act(async () => userEvent.type(passwordField, 'password123'));
+    await act(async () => userEvent.click(submitButton));
 
     expect(mockNavigate).toHaveBeenCalled();
+    expect(mockNavigate).toHaveBeenCalledWith(ROUTES.DASHBOARD);
   });
 });
 
-export {};
+// export {};
