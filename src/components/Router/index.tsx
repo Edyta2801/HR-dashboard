@@ -1,13 +1,13 @@
 import { Route, Routes } from 'react-router-dom';
 import CenteredLayout from 'components/centeredLayout/CenteredLayout';
-import Signin from '../../pages/SigninPage';
+import Signin from '../../views/SigninPage';
 import { ROUTES } from '../../types/routes';
-import Home from '../../pages/HomePage';
-import Signup from '../../pages/SignupPage';
-import Menu2Page from '../../pages/Menu2Page';
+import Home from '../../views/home/Home';
+import Signup from '../../views/SignupPage';
+import Menu2Page from '../../views/Menu2Page';
 import Layout from '../Layout';
-import DashboardPage from '../../pages/DashboardPage';
-import ProfilePage from '../../pages/ProfilePage';
+import DashboardPage from '../../views/DashboardPage';
+import ProfilePage from '../../views/ProfilePage';
 
 function Router() {
   return (

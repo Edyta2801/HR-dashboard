@@ -10,9 +10,9 @@ import { ROUTES } from '../../types/routes';
 // import ErrorInfo from "../ErrorInfo";
 import Header from '../Header';
 import Navigation from '../Navigation';
-import ProfilePage from '../../pages/ProfilePage';
-import DashboardPage from '../../pages/DashboardPage';
-import Menu2Page from '../../pages/Menu2Page';
+import ProfilePage from '../../views/ProfilePage';
+import DashboardPage from '../../views/DashboardPage';
+import Menu2Page from '../../views/Menu2Page';
 import * as styles from './Layout.styles';
 
 type LayoutProps = {
