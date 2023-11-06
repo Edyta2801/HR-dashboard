@@ -3,6 +3,8 @@ import { act } from 'react-dom/test-utils';
 import { render, screen } from 'tests';
 import { ROUTES } from 'types/routes';
 import SigninForm from '.';
+import { server } from 'tests/msw/server';
+import { rest } from 'msw';
 
 const mockNavigate = jest.fn();
 
@@ -53,6 +55,29 @@ describe('Signin', () => {
 
     expect(mockNavigate).toHaveBeenCalled();
     expect(mockNavigate).toHaveBeenCalledWith(ROUTES.DASHBOARD);
+  });
+
+  it('doesnt redirect on error', async () => {
+    server.use(
+      rest.post(
+        `${process.env.REAT_APP_API_URL}/app/auth/login`,
+        async (_req, res, ctx) => res(ctx.status(500)),
+      ),
+    );
+
+    render(<SigninForm />);
+    const emailField = screen.getByPlaceholderText(/Username */);
+    const passwordField = screen.getByPlaceholderText(/Password */);
+    const submitButton = screen.getByRole('button');
+
+    await userEvent.type(emailField, 'admin@admin.com');
+    await userEvent.type(passwordField, 'admin');
+    await userEvent.click(submitButton);
+
+    const errorMessage=screen.getByText(/Forgot Password?/)
+
+    expect(mockNavigate).not.toHaveBeenCalled();
+    expect(errorMessage).toBeInTheDocument();
   });
 });
 
