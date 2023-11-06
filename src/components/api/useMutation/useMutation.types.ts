@@ -1,6 +1,6 @@
-export type UseMutationProps<T> = {
-  mutateFn: (args:T) => Promise<void>;
-  onSuccess?:()=>void;
+export type UseMutationProps<T, R> = {
+  mutateFn: (args:T) => Promise<R>;
+  onSuccess?:(arg:R)=>void;
 };
 
 export type MutationState =

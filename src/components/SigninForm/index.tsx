@@ -11,13 +11,18 @@ import {
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useCallback, useState } from 'react';
-import { SignInPayload } from 'components/SigninForm/SignIn.types';
+import {
+  SignInPayload,
+  SignInResponse,
+} from 'components/SigninForm/SignIn.types';
 import { emailRegex } from 'utils/emailRegex';
 import { ROUTES } from 'types/routes';
 import { useTokenContext } from 'context/tokenContext/useTokenContext';
+import { AxiosResponse } from 'axios';
+import axios from '../api/axios';
+
 import { useMutation } from '../api/useMutation/useMutation';
 import * as styles from './SigninForm.styles';
-import axios from '../api/axios';
 
 function SigninForm() {
   const [checked, setChecked] = useState(false);
@@ -26,14 +31,17 @@ function SigninForm() {
 
   const navigate = useNavigate();
 
-  const onSuccess = useCallback(() => {
-    onTokenSave('token');
-    navigate(ROUTES.DASHBOARD);
-  }, [navigate, onTokenSave]);
+  const onSuccess = useCallback(
+    (res: AxiosResponse<SignInResponse>) => {
+      onTokenSave(res.data.access_token);
+      navigate(ROUTES.DASHBOARD);
+    },
+    [navigate, onTokenSave],
+  );
 
   const { state, onMutate } = useMutation({
     mutateFn: (payload: SignInPayload) =>
-      axios.post('/app/auth/login', payload),
+      axios.post<SignInResponse>('/app/auth/login', payload),
     onSuccess,
   });
 
