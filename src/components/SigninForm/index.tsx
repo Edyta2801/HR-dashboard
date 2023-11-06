@@ -14,6 +14,7 @@ import { useCallback, useState } from 'react';
 import { SignInPayload } from 'components/SigninForm/SignIn.types';
 import { emailRegex } from 'utils/emailRegex';
 import { ROUTES } from 'types/routes';
+import { useTokenContext } from 'context/tokenContext/useTokenContext';
 import { useMutation } from '../api/useMutation/useMutation';
 import * as styles from './SigninForm.styles';
 import axios from '../api/axios';
@@ -21,12 +22,14 @@ import axios from '../api/axios';
 function SigninForm() {
   const [checked, setChecked] = useState(false);
 
+  const { onTokenSave } = useTokenContext();
+
   const navigate = useNavigate();
 
   const onSuccess = useCallback(() => {
-    console.log('onSuccess');
+    onTokenSave('token');
     navigate(ROUTES.DASHBOARD);
-  }, [navigate]);
+  }, [navigate, onTokenSave]);
 
   const { state, onMutate } = useMutation({
     mutateFn: (payload: SignInPayload) =>
