@@ -1,8 +1,13 @@
 import { ReactNode } from 'react';
 
+export type OnTokenSaveArgs = {
+  newToken: string;
+  storeTokenInStorage: boolean;
+};
+
 export type TokenContextValue = {
   accessToken: string | undefined;
-  onTokenSave: (newToken: string) => void;
+  onTokenSave: (args: OnTokenSaveArgs) => void;
 };
 
 export type TokenContextControllerProps = {

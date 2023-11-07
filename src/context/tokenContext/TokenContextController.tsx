@@ -1,15 +1,27 @@
 import { useCallback, useMemo, useState } from 'react';
 import { TokenContext } from './TokenContext';
-import { TokenContextControllerProps } from './TokenContext.types';
+import {
+  OnTokenSaveArgs,
+  TokenContextControllerProps,
+} from './TokenContext.types';
+
+export const tokenStorageKey = 'access_token';
 
 export function TokenContextController({
   children,
 }: TokenContextControllerProps) {
   const [accessToken, setAccessToken] = useState<string>();
 
-  const onTokenSave = useCallback((newToken: string) => {
-    setAccessToken(newToken);
-  }, []);
+  const onTokenSave = useCallback(
+    ({ newToken, storeTokenInStorage }: OnTokenSaveArgs) => {
+      setAccessToken(newToken);
+
+      if (storeTokenInStorage) {
+        localStorage.setItem(tokenStorageKey, newToken);
+      }
+    },
+    [],
+  );
 
   const contextValue = useMemo(
     () => ({ accessToken, onTokenSave }),

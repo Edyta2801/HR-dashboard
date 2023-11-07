@@ -33,10 +33,13 @@ function SigninForm() {
 
   const onSuccess = useCallback(
     (res: AxiosResponse<SignInResponse>) => {
-      onTokenSave(res.data.access_token);
+      onTokenSave({
+        newToken: res.data.access_token,
+        storeTokenInStorage: checked,
+      });
       navigate(ROUTES.DASHBOARD);
     },
-    [navigate, onTokenSave],
+    [checked, navigate, onTokenSave],
   );
 
   const { state, onMutate } = useMutation({
