@@ -1,7 +1,10 @@
 import { Route, Routes } from 'react-router-dom';
 import CenteredLayout from 'components/centeredLayout/CenteredLayout';
-import Signin from '../../views/SigninPage';
+import { ProtectedRoute } from 'components/protectedRoute/ProtectedRoute';
 import { ROUTES } from '../../types/routes';
+
+import Signin from '../../views/SigninPage';
+
 import Home from '../../views/home/Home';
 import Signup from '../../views/SignupPage';
 import Menu2Page from '../../views/Menu2Page';
@@ -20,9 +23,11 @@ function Router() {
       <Route
         path={ROUTES.DASHBOARD}
         element={
-          <Layout>
-            <DashboardPage />
-          </Layout>
+          <ProtectedRoute>
+            <Layout>
+              <DashboardPage />
+            </Layout>
+          </ProtectedRoute>
         }
       />
       <Route

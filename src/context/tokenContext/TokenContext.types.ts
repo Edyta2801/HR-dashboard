@@ -6,7 +6,7 @@ export type OnTokenSaveArgs = {
 };
 
 export type TokenContextValue = {
-  accessToken: string | undefined;
+  accessToken: string | null;
   onTokenSave: (args: OnTokenSaveArgs) => void;
 };
 

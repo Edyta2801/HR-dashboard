@@ -10,7 +10,9 @@ export const tokenStorageKey = 'access_token';
 export function TokenContextController({
   children,
 }: TokenContextControllerProps) {
-  const [accessToken, setAccessToken] = useState<string>();
+  const [accessToken, setAccessToken] = useState<string | null>(
+    localStorage.getItem(tokenStorageKey),
+  );
 
   const onTokenSave = useCallback(
     ({ newToken, storeTokenInStorage }: OnTokenSaveArgs) => {
