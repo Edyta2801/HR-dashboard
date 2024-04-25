@@ -13,15 +13,16 @@ import { useForm } from 'react-hook-form';
 import { ROUTES } from 'types/routes';
 import { useMutation } from 'components/api/useMutation/useMutation';
 import { emailRegex } from 'utils/emailRegex';
+import { AxiosInstance } from 'axios';
 import { SignUpPayload } from './SignUp.types';
-import axios from '../api/axios';
-
 import * as styles from './SignupForm.styles';
 
 function SignupForm() {
   const { state, onMutate } = useMutation({
-    mutateFn: (payload: Omit<SignUpPayload, 'passwordRepeat'>) =>
-      axios.post('/app/auth/register', payload),
+    mutateFn:
+      (axios: AxiosInstance) =>
+      (payload: Omit<SignUpPayload, 'passwordRepeat'>) =>
+        axios.post('/app/auth/register', payload),
   });
 
   const {

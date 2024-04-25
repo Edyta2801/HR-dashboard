@@ -1,6 +1,6 @@
 import { useCallback, useReducer } from 'react';
 
-import axiosInstance, { isAxiosError } from '../axios';
+import axios, { isAxiosError } from '../axios';
 import { defaultState, mutationReducer } from './mutationReducer';
 import { UseMutationProps } from './useMutation.types';
 
@@ -15,7 +15,7 @@ export const useMutation = <T, R>({
       try {
         dispatch({ type: 'init' });
         // await axios.post('/app/auth/login', payload);
-        const res = await mutateFn(axiosInstance)(payload);
+        const res = await mutateFn(axios)(payload);
         if (onSuccess) onSuccess(res);
       } catch (error) {
         if (isAxiosError(error) && error.response?.status === 401) {

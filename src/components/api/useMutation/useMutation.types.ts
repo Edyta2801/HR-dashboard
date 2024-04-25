@@ -1,5 +1,7 @@
+import { AxiosInstance } from "axios";
+
 export type UseMutationProps<T, R> = {
-  mutateFn: (args:T) => Promise<R>;
+  mutateFn: (axios:AxiosInstance)=>(arg:T) => Promise<R>;
   onSuccess?:(arg:R)=>void;
 };
 
