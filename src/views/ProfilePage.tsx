@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 // import { useNavigate } from 'react-router-dom';
 import api from '../components/api';
 
@@ -40,14 +40,12 @@ function ProfilePage() {
       //     });
       //   }, [movieId]);
       .then((result: any) => {
-        console.log('result', result.data);
         setProfile(result.data);
         localStorage.setItem('result', result.data);
         // navigate("/dashboard")
       })
-      .catch((error) => {
+      .catch((_error) => {
         // setError(true);
-        console.log(error);
         // setLoading(false)
       });
   }, []);

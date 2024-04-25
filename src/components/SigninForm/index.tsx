@@ -18,8 +18,7 @@ import {
 import { emailRegex } from 'utils/emailRegex';
 import { ROUTES } from 'types/routes';
 import { useTokenContext } from 'context/tokenContext/useTokenContext';
-import { AxiosResponse } from 'axios';
-import axios from '../api/axios';
+import { AxiosInstance, AxiosResponse } from 'axios';
 
 import { useMutation } from '../api/useMutation/useMutation';
 import * as styles from './SigninForm.styles';
@@ -43,7 +42,7 @@ function SigninForm() {
   );
 
   const { state, onMutate } = useMutation({
-    mutateFn: (payload: SignInPayload) =>
+    mutateFn: (axios: AxiosInstance) => (payload: SignInPayload) =>
       axios.post<SignInResponse>('/app/auth/login', payload),
     onSuccess,
   });
