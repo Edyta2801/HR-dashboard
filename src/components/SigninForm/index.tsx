@@ -62,8 +62,8 @@ function SigninForm() {
             <TextField
               fullWidth
               variant="standard"
-              autoComplete="Username"
-              placeholder="Username *"
+              autoComplete="username"
+              placeholder="Email *"
               InputProps={{
                 disableUnderline: true,
                 style: {

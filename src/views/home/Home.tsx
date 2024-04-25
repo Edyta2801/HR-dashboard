@@ -6,7 +6,7 @@ function Home() {
   return (
     <Box>
       <Typography variant="h1">HR analytics</Typography>
-      <Box sx={{ position: 'absolute', top: '30%', left: '50%' }}>
+      <Box>
         <Typography variant="h4" align="center">
           <Link to="/signin">Signin</Link>
         </Typography>

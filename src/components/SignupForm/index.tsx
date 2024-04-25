@@ -33,7 +33,6 @@ function SignupForm() {
   } = useForm<SignUpPayload>();
 
   const watchedPassword = watch('password');
-  console.log(watchedPassword);
 
   const handleMutate = useCallback(
     async (payload: SignUpPayload) => {
