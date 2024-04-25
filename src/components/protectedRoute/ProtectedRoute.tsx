@@ -2,7 +2,7 @@ import { useTokenContext } from 'context/tokenContext/useTokenContext';
 import { ROUTES } from 'types/routes';
 import { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'components/api/axios';
+import axios from 'components/api/useAxios/axios';
 import { ProtectedRouteProps } from './ProtectedRoute.types';
 
 export function ProtectedRoute({ children }: ProtectedRouteProps) {

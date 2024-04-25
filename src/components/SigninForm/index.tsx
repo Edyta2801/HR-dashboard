@@ -42,7 +42,7 @@ function SigninForm() {
   );
 
   const { state, onMutate } = useMutation({
-    mutateFn: (axios: AxiosInstance) => (payload: SignInPayload) =>
+    mutateFn: (axios) => (payload: SignInPayload) =>
       axios.post<SignInResponse>('/app/auth/login', payload),
     onSuccess,
   });

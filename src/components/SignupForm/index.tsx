@@ -19,10 +19,8 @@ import * as styles from './SignupForm.styles';
 
 function SignupForm() {
   const { state, onMutate } = useMutation({
-    mutateFn:
-      (axios: AxiosInstance) =>
-      (payload: Omit<SignUpPayload, 'passwordRepeat'>) =>
-        axios.post('/app/auth/register', payload),
+    mutateFn: (axios) => (payload: Omit<SignUpPayload, 'passwordRepeat'>) =>
+      axios.post('/app/auth/register', payload),
   });
 
   const {

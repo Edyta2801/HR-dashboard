@@ -1,8 +1,11 @@
 import { useCallback, useReducer } from 'react';
 
-import axios, { isAxiosError } from '../axios';
+import { isAxiosError } from '../useAxios/axios';
 import { defaultState, mutationReducer } from './mutationReducer';
 import { UseMutationProps } from './useMutation.types';
+import { useAxios } from '../useAxios/useAxios';
+
+const axios = useAxios();
 
 export const useMutation = <T, R>({
   mutateFn,
