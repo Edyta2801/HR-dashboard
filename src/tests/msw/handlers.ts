@@ -9,4 +9,9 @@ const loginHandler = rest.post(
     ),
 );
 
+const profileHandler = rest.get(
+  `${process.env.REACT_APP_API_URL}/app/profile`,
+  async (_req, res, ctx) => res(ctx.json({})),
+);
+
 export const handlers = [loginHandler];

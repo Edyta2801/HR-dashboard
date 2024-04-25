@@ -10,14 +10,19 @@ export function ProtectedRoute({ children }: ProtectedRouteProps) {
   const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
 
   const checkProfile = useCallback(async () => {
     try {
       await axios.get('/app/profile', {
         headers: { Authorization: `Bearer ${accessToken}` },
       });
+
+      throw new Error('test');
     } catch (_error) {
+      setIsError(true);
       navigate(ROUTES.SIGNIN);
+      setIsError(true);
     }
     setIsLoading(false);
   }, [accessToken, navigate]);
@@ -29,6 +34,7 @@ export function ProtectedRoute({ children }: ProtectedRouteProps) {
     }
     checkProfile();
   }, [accessToken, checkProfile, navigate]);
+  if (isLoading || isError || !accessToken) return null;
 
   return <div>{children}</div>;
 }

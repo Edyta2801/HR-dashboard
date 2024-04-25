@@ -5,12 +5,12 @@ import { defaultState, mutationReducer } from './mutationReducer';
 import { UseMutationProps } from './useMutation.types';
 import { useAxios } from '../useAxios/useAxios';
 
-const axios = useAxios();
-
 export const useMutation = <T, R>({
   mutateFn,
   onSuccess,
 }: UseMutationProps<T, R>) => {
+  const axios = useAxios();
+
   const [state, dispatch] = useReducer(mutationReducer, defaultState);
 
   const onMutate = useCallback(
