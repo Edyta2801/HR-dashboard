@@ -1,17 +1,23 @@
 import { rest } from 'msw';
-import { tokenStorageKey } from 'context/tokenContext/TokenContextController';
+
 import { render, screen } from 'tests';
 import { server } from 'tests/msw/server';
 
 import { ProtectedRoute } from './ProtectedRoute';
 
+const mockNavigate = jest.fn();
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: () => mockNavigate,
+}));
+
 describe('ProtectedRoute', () => {
   afterEach(() => {
-    localStorage.clear();
+    jest.clearAllMocks();
   });
 
   it('renders children on auth success', async () => {
-    localStorage.setItem(tokenStorageKey, 'test');
     render(<ProtectedRoute>test</ProtectedRoute>);
 
     const protectedElement = await screen.findByText(/test/);
@@ -19,11 +25,12 @@ describe('ProtectedRoute', () => {
   });
 
   it('doesnt render children on auth fail', async () => {
-    localStorage.setItem(tokenStorageKey, 'test');
     server.use(
       rest.get(
         `${process.env.REACT_APP_API_URL}/app/profile`,
-        (_req, res, ctx) => res(ctx.status(401)),
+        async (_req, res, ctx) => {
+          return res(ctx.status(500));
+        },
       ),
     );
 

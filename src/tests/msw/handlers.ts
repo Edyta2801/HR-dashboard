@@ -5,7 +5,7 @@ const loginHandler = rest.post(
   async (_req, res, ctx) =>
     res(
       ctx.json({
-        access_token: 'accessTokenForTests',
+        access_token: 'accesstokenfortests',
       }),
     ),
 );
@@ -16,3 +16,4 @@ const profileHandler = rest.get(
 );
 
 export const handlers = [loginHandler, profileHandler];
+
