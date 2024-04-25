@@ -18,11 +18,11 @@ export function ProtectedRoute({ children }: ProtectedRouteProps) {
         headers: { Authorization: `Bearer ${accessToken}` },
       });
 
-      throw new Error('test');
+      // throw new Error('test');
     } catch (_error) {
       setIsError(true);
       navigate(ROUTES.SIGNIN);
-      setIsError(true);
+      // setIsError(true);
     }
     setIsLoading(false);
   }, [accessToken, navigate]);
