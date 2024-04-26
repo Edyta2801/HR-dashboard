@@ -9,7 +9,6 @@ import Signin from '../../views/SigninPage';
 import Home from '../../views/home/Home';
 import Signup from '../../views/SignupPage';
 import Menu2Page from '../../views/Menu2Page';
-import Layout from '../Layout';
 import DashboardPage from '../../views/DashboardPage';
 import ProfilePage from '../../views/ProfilePage';
 
@@ -22,33 +21,16 @@ function Router() {
         <Route path={ROUTES.SIGNUP} element={<Signup />} />
       </Route>
 
-      <Route element={<DashboardLayout />}>
-        <Route
-          path={ROUTES.DASHBOARD}
-          element={
-            <ProtectedRoute>
-              <Layout>
-                <DashboardPage />
-              </Layout>
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path={ROUTES.PROFILE}
-          element={
-            <Layout>
-              <ProfilePage />
-            </Layout>
-          }
-        />
-        <Route
-          path={ROUTES.MENU2}
-          element={
-            <Layout>
-              <Menu2Page />
-            </Layout>
-          }
-        />{' '}
+      <Route
+        element={
+          <ProtectedRoute>
+            <DashboardLayout />
+          </ProtectedRoute>
+        }
+      >
+        <Route path={ROUTES.DASHBOARD} element={<DashboardPage />} />
+        <Route path={ROUTES.PROFILE} element={<ProfilePage />} />
+        <Route path={ROUTES.MENU2} element={<Menu2Page />} />{' '}
       </Route>
     </Routes>
   );
