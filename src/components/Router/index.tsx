@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import CenteredLayout from 'components/centeredLayout/CenteredLayout';
+import { DashboardLayout } from 'components/dashboardLayout/DashboardLayout';
 import { ProtectedRoute } from 'components/protectedRoute/ProtectedRoute';
 import { ROUTES } from '../../types/routes';
 
@@ -20,32 +21,35 @@ function Router() {
         <Route path={ROUTES.SIGNIN} element={<Signin />} />
         <Route path={ROUTES.SIGNUP} element={<Signup />} />
       </Route>
-      <Route
-        path={ROUTES.DASHBOARD}
-        element={
-          <ProtectedRoute>
+
+      <Route element={<DashboardLayout />}>
+        <Route
+          path={ROUTES.DASHBOARD}
+          element={
+            <ProtectedRoute>
+              <Layout>
+                <DashboardPage />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={ROUTES.PROFILE}
+          element={
             <Layout>
-              <DashboardPage />
+              <ProfilePage />
             </Layout>
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path={ROUTES.PROFILE}
-        element={
-          <Layout>
-            <ProfilePage />
-          </Layout>
-        }
-      />
-      <Route
-        path={ROUTES.MENU2}
-        element={
-          <Layout>
-            <Menu2Page />
-          </Layout>
-        }
-      />
+          }
+        />
+        <Route
+          path={ROUTES.MENU2}
+          element={
+            <Layout>
+              <Menu2Page />
+            </Layout>
+          }
+        />{' '}
+      </Route>
     </Routes>
   );
 }
