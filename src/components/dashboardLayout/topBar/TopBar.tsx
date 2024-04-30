@@ -3,11 +3,16 @@ import {
   AppBar,
   Avatar,
   Box,
+  Link,
+  ListItemIcon,
+  ListItemText,
   Menu,
   MenuItem,
   Toolbar,
   Typography,
 } from '@mui/material';
+import { Logout, PersonOutline } from '@mui/icons-material';
+import { ROUTES } from 'types/routes';
 
 import * as styles from './TopBar.styles';
 
@@ -43,16 +48,48 @@ export function TopBar() {
         </Typography>
 
         <Box onMouseEnter={onMouseEnter} ref={avatarRef}>
-          <Avatar>ES</Avatar>
+          <Avatar> ES</Avatar>
           <Menu
             onClose={handleClose}
             anchorEl={anchorEl}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'left',
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
             open={Boolean(anchorEl)}
-            anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-            transformOrigin={{ vertical: 'top', horizontal: 'right' }}
           >
-            <MenuItem>Profile</MenuItem>
-            <MenuItem>Logout</MenuItem>
+            <MenuItem sx={styles.usernameMenuItem} disabled>
+              <ListItemIcon>
+                <Avatar sx={styles.smallAvatar}>ES</Avatar>
+              </ListItemIcon>
+              <ListItemText>Edyta Szarowska</ListItemText>
+            </MenuItem>
+
+            <MenuItem
+              sx={styles.menuItem}
+              component={Link}
+              href={ROUTES.PROFILE}
+            >
+              <ListItemIcon>
+                <PersonOutline />
+              </ListItemIcon>
+              <ListItemText>Profile</ListItemText>
+            </MenuItem>
+
+            <MenuItem
+              sx={styles.menuItem}
+              component={Link}
+              href={ROUTES.SIGNIN}
+            >
+              <ListItemIcon>
+                <Logout />
+              </ListItemIcon>
+              <ListItemText>Logout</ListItemText>
+            </MenuItem>
           </Menu>
         </Box>
       </Toolbar>
