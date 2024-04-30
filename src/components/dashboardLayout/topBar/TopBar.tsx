@@ -16,6 +16,10 @@ export function TopBar() {
   const onMouseEnter = useCallback((event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   }, []);
+
+  const handleClose = useCallback(() => {
+    setAnchorEl(null);
+  }, []);
   return (
     <AppBar sx={styles.topBar}>
       {' '}
@@ -23,7 +27,7 @@ export function TopBar() {
         <Typography variant="h6" component="div">
           HR_Analytics
         </Typography>{' '}
-        <Box onMouseEnter={onMouseEnter}>
+        <Box onMouseEnter={onMouseEnter} onMouseLeave={handleClose}>
           <Avatar>ES</Avatar>
           <Menu
             anchorEl={anchorEl}
