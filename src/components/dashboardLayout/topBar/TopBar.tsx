@@ -15,10 +15,14 @@ import { Logout, PersonOutline } from '@mui/icons-material';
 import { ROUTES } from 'types/routes';
 
 import * as styles from './TopBar.styles';
+import { useQuery } from 'components/api/useQuery/useQuery';
 
 export function TopBar() {
   const avatarRef = useRef<HTMLDivElement | null>(null);
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+
+useQuery('/app/profile')
+
   const onMouseEnter = useCallback((event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   }, []);
