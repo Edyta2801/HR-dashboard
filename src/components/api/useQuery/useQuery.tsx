@@ -1,11 +1,14 @@
-import { useCallback, useReducer } from 'react';
+import { useCallback, useEffect, useReducer } from 'react';
 
 import { isAxiosError } from '../useAxios/axios';
 import { defaultState, queryReducer } from './queryReducer';
 import { useAxios } from '../useAxios/useAxios';
-import { QueryState, QueryAction } from './useQuery.types';
+import { QueryState, QueryAction, UseQueryProps } from './useQuery.types';
 
-export const useQuery = <T extends unknown>(url:string) => {
+export const useQuery = <T extends unknown>({
+  url,
+  initFetch = true,
+}: UseQueryProps) => {
   const [state, dispatch] = useReducer<
     (state: QueryState<T>, action: QueryAction) => QueryState<T>
   >(queryReducer, defaultState);
@@ -30,6 +33,12 @@ export const useQuery = <T extends unknown>(url:string) => {
         payload: 'Something went wrong. Please try again.',
       });
     }
-  }, [axios]);
+  }, [axios, url]);
+  useEffect(() => {
+    if (initFetch) {
+      onQuery();
+    }
+  }, [initFetch, onQuery]);
+
   return { onQuery, state };
 };

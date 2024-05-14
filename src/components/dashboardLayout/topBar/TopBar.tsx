@@ -13,15 +13,16 @@ import {
 } from '@mui/material';
 import { Logout, PersonOutline } from '@mui/icons-material';
 import { ROUTES } from 'types/routes';
-
-import * as styles from './TopBar.styles';
 import { useQuery } from 'components/api/useQuery/useQuery';
+import { getInitials } from 'common/getInitials/getInitials';
+import { Profile } from 'common/profile.types';
+import * as styles from './TopBar.styles';
 
 export function TopBar() {
   const avatarRef = useRef<HTMLDivElement | null>(null);
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
-useQuery('/app/profile')
+  const { state } = useQuery<Profile>({ url: '/app/profile', initFetch: true });
 
   const onMouseEnter = useCallback((event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -44,6 +45,10 @@ useQuery('/app/profile')
       if (event.clientY > bottom + offset) setAnchorEl(null);
     });
   }, []);
+
+  const initials = `${getInitials(
+    `${state.data?.firstname} ${state.data?.lastname}`,
+  )}`;
   return (
     <AppBar sx={styles.topBar}>
       <Toolbar sx={styles.wrapper}>
@@ -52,7 +57,7 @@ useQuery('/app/profile')
         </Typography>
 
         <Box onMouseEnter={onMouseEnter} ref={avatarRef}>
-          <Avatar> ES</Avatar>
+          <Avatar>{initials}</Avatar>
           <Menu
             onClose={handleClose}
             anchorEl={anchorEl}
@@ -68,7 +73,7 @@ useQuery('/app/profile')
           >
             <MenuItem sx={styles.usernameMenuItem} disabled>
               <ListItemIcon>
-                <Avatar sx={styles.smallAvatar}>ES</Avatar>
+                <Avatar sx={styles.smallAvatar}>{initials}</Avatar>
               </ListItemIcon>
               <ListItemText>Edyta Szarowska</ListItemText>
             </MenuItem>

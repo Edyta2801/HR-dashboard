@@ -1,3 +1,8 @@
+export type UseQueryProps = {
+  url: string;
+  initFetch: Boolean;
+};
+
 export type QueryState<T> =
   | { isLoading: true; errorMessage: undefined; data: undefined }
   | { isLoading: false; errorMessage: string; data: undefined }
