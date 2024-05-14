@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 // import { useNavigate } from 'react-router-dom';
 import api from '../components/api';
 
-function ProfilePage() {
+export function ProfilePage() {
   const [profile, setProfile] = useState(null);
   // const [isLoading, setLoading] = useState(true);
   // const [hasError, setError] = useState(false);
@@ -43,11 +43,11 @@ function ProfilePage() {
         setProfile(result.data);
         localStorage.setItem('result', result.data);
         // navigate("/dashboard")
-      })
-      .catch((_error) => {
-        // setError(true);
-        // setLoading(false)
       });
+    // .catch((error) => {
+    //   setError(true);
+    //   setLoading(false)
+    // });
   }, []);
 
   return (

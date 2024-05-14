@@ -8,9 +8,9 @@ import Signin from '../../views/SigninPage';
 
 import Home from '../../views/home/Home';
 import Signup from '../../views/SignupPage';
-import Menu2Page from '../../views/Menu2Page';
-import DashboardPage from '../../views/DashboardPage';
-import ProfilePage from '../../views/ProfilePage';
+import { Menu2Page } from '../../views/Menu2Page';
+import { Dashboard } from '../../views/Dashboard/Dashboard';
+import { ProfilePage } from '../../views/ProfilePage';
 
 function Router() {
   return (
@@ -28,7 +28,7 @@ function Router() {
           </ProtectedRoute>
         }
       >
-        <Route path={ROUTES.DASHBOARD} element={<DashboardPage />} />
+        <Route path={ROUTES.DASHBOARD} element={<Dashboard />} />
         <Route path={ROUTES.PROFILE} element={<ProfilePage />} />
         <Route path={ROUTES.MENU2} element={<Menu2Page />} />{' '}
       </Route>

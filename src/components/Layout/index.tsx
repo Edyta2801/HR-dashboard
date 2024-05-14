@@ -11,7 +11,7 @@ import { ROUTES } from '../../types/routes';
 import Header from '../Header';
 import Navigation from '../Navigation';
 import ProfilePage from '../../views/ProfilePage';
-import DashboardPage from '../../views/DashboardPage';
+import {Dashboard} from '../../views/Dashboard/Dashboard';
 import Menu2Page from '../../views/Menu2Page';
 import * as styles from './Layout.styles';
 
@@ -37,7 +37,7 @@ function Layout({ children }: LayoutProps) {
           <Route path={ROUTES.PROFILE} element={<ProfilePage />} />
           <Route path={ROUTES.MENU2} element={<Menu2Page />} />
           {/* <Route path="*" element={<ErrorInfo />} /> */}
-          <Route path={ROUTES.DASHBOARD} element={<DashboardPage />} />
+          <Route path={ROUTES.DASHBOARD} element={<Dashboard />} />
         </Routes>
       </Box>
     </Box>

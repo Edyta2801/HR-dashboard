@@ -1,4 +1,4 @@
-function Menu2Page() {
+export function Menu2Page() {
   return (
     <section>
       Menu 2
