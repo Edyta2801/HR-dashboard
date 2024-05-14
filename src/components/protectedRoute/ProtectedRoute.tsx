@@ -1,40 +1,32 @@
 import { useTokenContext } from 'context/tokenContext/useTokenContext';
 import { ROUTES } from 'types/routes';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'components/api/useAxios/axios';
+import { useQuery } from 'components/api/useQuery/useQuery';
+import { Profile } from 'common/profile.types';
 import { ProtectedRouteProps } from './ProtectedRoute.types';
 
 export function ProtectedRoute({ children }: ProtectedRouteProps) {
   const { accessToken } = useTokenContext();
   const navigate = useNavigate();
 
-  const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(false);
+  const { state, onQuery } = useQuery<Profile>({
+    url: 'app/profile',
+    initFetch: false,
+  });
 
   const checkProfile = useCallback(async () => {
-    try {
-      await axios.get('/app/profile', {
-        headers: { Authorization: `Bearer ${accessToken}` },
-      });
-
-      // throw new Error('test');
-    } catch (_error) {
-      setIsError(true);
-      navigate(ROUTES.SIGNIN);
-      // setIsError(true);
-    }
-    setIsLoading(false);
-  }, [accessToken, navigate]);
+    onQuery();
+  }, [onQuery]);
 
   useEffect(() => {
     if (!accessToken) {
       navigate(ROUTES.SIGNIN);
-      setIsLoading(false);
+      return;
     }
     checkProfile();
   }, [accessToken, checkProfile, navigate]);
-  if (isLoading || isError || !accessToken) return null;
+  if (state.isLoading || state.errorMessage || !accessToken) return null;
 
   return <div>{children}</div>;
 }
