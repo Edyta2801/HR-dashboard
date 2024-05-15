@@ -15,7 +15,7 @@ import { Logout, PersonOutline } from '@mui/icons-material';
 import { ROUTES } from 'types/routes';
 import { useQuery } from 'components/api/useQuery/useQuery';
 import { getInitials } from 'common/getInitials/getInitials';
-import { Profile } from 'common/profile.types';
+import { Profile } from '../../../types/profile.types';
 import * as styles from './TopBar.styles';
 
 export function TopBar() {

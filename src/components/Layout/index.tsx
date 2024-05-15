@@ -10,7 +10,7 @@ import { ROUTES } from '../../types/routes';
 // import ErrorInfo from "../ErrorInfo";
 import Header from '../Header';
 import Navigation from '../Navigation';
-import ProfilePage from '../../views/ProfilePage';
+import ProfilePage from '../../views/Profile';
 import {Dashboard} from '../../views/Dashboard/Dashboard';
 import Menu2Page from '../../views/Menu2Page';
 import * as styles from './Layout.styles';

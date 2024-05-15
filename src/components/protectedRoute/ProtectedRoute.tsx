@@ -3,7 +3,7 @@ import { ROUTES } from 'types/routes';
 import { useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from 'components/api/useQuery/useQuery';
-import { Profile } from 'common/profile.types';
+import { Profile } from '../../types/profile.types';
 import { ProtectedRouteProps } from './ProtectedRoute.types';
 
 export function ProtectedRoute({ children }: ProtectedRouteProps) {
