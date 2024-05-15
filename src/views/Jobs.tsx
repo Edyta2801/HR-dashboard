@@ -1,4 +1,4 @@
-export function Menu2Page() {
+export function Jobs() {
   return (
     <section>
       Menu 2
@@ -15,4 +15,4 @@ export function Menu2Page() {
   );
 }
 
-export default Menu2Page;
+export default Jobs;

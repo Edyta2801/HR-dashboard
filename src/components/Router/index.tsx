@@ -8,7 +8,7 @@ import Signin from '../../views/SigninPage';
 
 import Home from '../../views/home/Home';
 import Signup from '../../views/SignupPage';
-import { Menu2Page } from '../../views/Menu2Page';
+import { Jobs } from '../../views/Jobs';
 import { Dashboard } from '../../views/Dashboard/Dashboard';
 import { Profile } from '../../views/Profile';
 
@@ -30,7 +30,7 @@ function Router() {
       >
         <Route path={ROUTES.DASHBOARD} element={<Dashboard />} />
         <Route path={ROUTES.PROFILE} element={<Profile />} />
-        <Route path={ROUTES.MENU2} element={<Menu2Page />} />{' '}
+        <Route path={ROUTES.JOBS} element={<Jobs />} />{' '}
       </Route>
     </Routes>
   );

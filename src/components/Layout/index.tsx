@@ -12,7 +12,7 @@ import Header from '../Header';
 import Navigation from '../Navigation';
 import ProfilePage from '../../views/Profile';
 import {Dashboard} from '../../views/Dashboard/Dashboard';
-import Menu2Page from '../../views/Menu2Page';
+import Menu2Page from '../../views/Jobs';
 import * as styles from './Layout.styles';
 
 type LayoutProps = {
