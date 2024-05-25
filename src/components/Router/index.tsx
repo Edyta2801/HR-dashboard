@@ -8,7 +8,7 @@ import Signin from '../../views/SigninPage';
 
 import Home from '../../views/home/Home';
 import Signup from '../../views/SignupPage';
-import { Jobs } from '../../views/Jobs';
+import { Jobs } from '../../views/jobs/Jobs';
 import { Dashboard } from '../../views/Dashboard/Dashboard';
 import { Profile } from '../../views/Profile';
 

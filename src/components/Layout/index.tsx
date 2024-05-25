@@ -11,8 +11,8 @@ import { ROUTES } from '../../types/routes';
 import Header from '../Header';
 import Navigation from '../Navigation';
 import ProfilePage from '../../views/Profile';
-import {Dashboard} from '../../views/Dashboard/Dashboard';
-import Menu2Page from '../../views/Jobs';
+import { Dashboard } from '../../views/Dashboard/Dashboard';
+import Menu2Page from '../../views/jobs/Jobs';
 import * as styles from './Layout.styles';
 
 type LayoutProps = {
