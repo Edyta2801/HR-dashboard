@@ -6,7 +6,7 @@ export enum ROUTES {
   PROFILE = '/profile',
   JOBS = '/jobs',
   CANDIDATES = '/candidates',
-  MENU2 = '/menu2',
+  addJob = '/jobs/add',
 }
 
 const menuLinks = [
@@ -16,3 +16,6 @@ const menuLinks = [
 ];
 
 export default menuLinks;
+
+export const getSingleJobUrl = (jobId: string) => `${ROUTES.JOBS}/${jobId}`;
+export const getEditJobUrl = (jobId: string) => `${ROUTES.addJob}/${jobId}`;

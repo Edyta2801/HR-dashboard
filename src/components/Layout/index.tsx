@@ -12,8 +12,8 @@ import Header from '../Header';
 import Navigation from '../Navigation';
 import ProfilePage from '../../views/Profile';
 import { Dashboard } from '../../views/Dashboard/Dashboard';
-import Menu2Page from '../../views/jobs/Jobs';
 import * as styles from './Layout.styles';
+import { Jobs } from 'views/jobs/Jobs';
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -35,7 +35,7 @@ function Layout({ children }: LayoutProps) {
       <Box component="main" sx={styles.main}>
         <Routes>
           <Route path={ROUTES.PROFILE} element={<ProfilePage />} />
-          <Route path={ROUTES.MENU2} element={<Menu2Page />} />
+          <Route path={ROUTES.JOBS} element={<Jobs />} />
           {/* <Route path="*" element={<ErrorInfo />} /> */}
           <Route path={ROUTES.DASHBOARD} element={<Dashboard />} />
         </Routes>
