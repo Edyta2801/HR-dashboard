@@ -2,7 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import CenteredLayout from 'components/centeredLayout/CenteredLayout';
 import { DashboardLayout } from 'components/dashboardLayout/DashboardLayout';
 import { ProtectedRoute } from 'components/protectedRoute/ProtectedRoute';
-import { ROUTES } from '../../types/routes';
+import { ROUTES, getSingleJobUrl } from '../../types/routes';
 
 import Signin from '../../views/SigninPage';
 
@@ -11,6 +11,7 @@ import Signup from '../../views/SignupPage';
 import { Jobs } from '../../views/jobs/Jobs';
 import { Dashboard } from '../../views/Dashboard/Dashboard';
 import { Profile } from '../../views/Profile';
+import { SingleJob } from 'views/singleJob/SingleJob';
 
 function Router() {
   return (
@@ -30,7 +31,8 @@ function Router() {
       >
         <Route path={ROUTES.DASHBOARD} element={<Dashboard />} />
         <Route path={ROUTES.PROFILE} element={<Profile />} />
-        <Route path={ROUTES.JOBS} element={<Jobs />} />{' '}
+        <Route path={ROUTES.JOBS} element={<Jobs />} />
+        <Route path={getSingleJobUrl(':id')} element={<SingleJob />} />
       </Route>
     </Routes>
   );

@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import axios from 'axios';
 import { useTokenContext } from 'context/tokenContext/useTokenContext';
 
-export const useAxios = () => {
+export function useAxios() {
   const { accessToken } = useTokenContext();
 
   const axiosClient = useMemo(() => {
@@ -16,6 +16,6 @@ export const useAxios = () => {
   }, [accessToken]);
 
   return axiosClient;
-};
+}
 
 export const { isAxiosError } = axios;
