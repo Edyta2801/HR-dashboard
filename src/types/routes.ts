@@ -7,6 +7,7 @@ export enum ROUTES {
   JOBS = '/jobs',
   CANDIDATES = '/candidates',
   addJob = '/jobs/add',
+  addCandidate = '/candidates/add',
 }
 
 const menuLinks = [
@@ -19,3 +20,8 @@ export default menuLinks;
 
 export const getSingleJobUrl = (jobId: string) => `${ROUTES.JOBS}/${jobId}`;
 export const getEditJobUrl = (jobId: string) => `${ROUTES.addJob}/${jobId}`;
+
+export const getSingleCandidateUrl = (candidateId: string) =>
+  `${ROUTES.CANDIDATES}/${candidateId}`;
+export const getEditCandidateUrl = (candidateId: string) =>
+  `${ROUTES.addCandidate}/${candidateId}`;
