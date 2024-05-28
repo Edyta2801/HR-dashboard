@@ -1,10 +1,9 @@
 import { Button, CircularProgress, Typography } from '@mui/material';
 import { Link, useParams } from 'react-router-dom';
-
-import { getEditCandidateUrl } from '../../types/routes';
 import { useCandidate } from '../../components/api/candidate/useCandidate';
+import { getEditCandidateUrl } from '../../types/routes';
 
-export const SingleCandidate = () => {
+export function SingleCandidate() {
   const { id } = useParams<{ id: string }>();
 
   if (!id) {
@@ -34,4 +33,4 @@ export const SingleCandidate = () => {
       </Button>
     </>
   );
-};
+}

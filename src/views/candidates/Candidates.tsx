@@ -12,16 +12,16 @@ import {
 } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { useCandidates } from '../../components/api/candidates/useCandidates';
-import { ROUTES, getSingleCandidateUrl } from '../../types/routes';
 import { Table } from 'components/table/Table';
 
 import * as styles from './candidates.styles';
 import { CandidatesTableColumnNames } from './Candidates.types';
 import { candidatesColumns } from './candidatesColumns';
 import { candidatesRowsPerPage } from './candidatesRowsPerPage';
+import { useCandidates } from '../../components/api/candidates/useCandidates';
+import { ROUTES, getSingleCandidateUrl } from '../../types/routes';
 
-export const Candidates = () => {
+export function Candidates() {
   const {
     data,
     errorMessage,
@@ -128,4 +128,4 @@ export const Candidates = () => {
       )}
     />
   );
-};
+}

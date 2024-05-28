@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
-
-import { useAxios } from '../../api/useAxios/useAxios';
-import { Job } from '../../api/jobs/jobs.types';
+import { Job } from '../jobs/jobs.types';
+import { useAxios } from '../useAxios/useAxios';
 
 export const useJob = (jobId: string) => {
   const [isLoading, setIsLoading] = useState(true);
