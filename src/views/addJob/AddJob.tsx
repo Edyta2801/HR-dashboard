@@ -1,5 +1,5 @@
-import { useAddJob } from './useAddJob';
-import { JobForm } from '../jobForm/JobForm';
+import { useAddJob } from '../../components/api/addJob/useAddJob';
+import { JobForm } from '../../components/jobForm/JobForm';
 
 export function AddJob() {
   const { addJob } = useAddJob();

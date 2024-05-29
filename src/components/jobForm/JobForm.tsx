@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Button, TextField, Typography } from '@mui/material';
 
-import { AddJobPayload } from '../addJob/addJob.types';
+import { AddJobPayload } from '../api/addJob/addJob.types';
 import { ROUTES } from '../../types/routes';
 
 import { JobFormProps } from './JobForm.types';

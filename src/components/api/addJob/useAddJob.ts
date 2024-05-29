@@ -1,4 +1,4 @@
-import { useAxios } from '../../components/api/useAxios/useAxios';
+import { useAxios } from '../useAxios/useAxios';
 
 import { AddJobPayload } from './addJob.types';
 

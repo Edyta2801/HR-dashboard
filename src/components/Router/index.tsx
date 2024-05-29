@@ -20,6 +20,7 @@ import { SingleJob } from 'views/singleJob/SingleJob';
 import { Candidates } from 'views/candidates/Candidates';
 import { SingleCandidate } from 'views/singleCandidate/SingleCandidate';
 import { AddJob } from 'views/addJob/AddJob';
+import { EditJob } from 'views/editJob/EditJob';
 
 function Router() {
   return (
@@ -42,7 +43,7 @@ function Router() {
         <Route path={ROUTES.JOBS} element={<Jobs />} />
         <Route path={getSingleJobUrl(':id')} element={<SingleJob />} />
         <Route path={ROUTES.addJob} element={<AddJob />} />
-        {/* <Route path={getEditJobUrl(':id')} element={<EditJob />} /> */}
+        <Route path={getEditJobUrl(':id')} element={<EditJob />} />
         <Route path={ROUTES.CANDIDATES} element={<Candidates />} />
         <Route
           path={getSingleCandidateUrl(':id')}

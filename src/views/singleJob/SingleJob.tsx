@@ -2,6 +2,7 @@ import { Button, CircularProgress, Typography } from '@mui/material';
 import { Link, useParams } from 'react-router-dom';
 
 import { useJob } from '../../components/api/job/useJob';
+import { getEditJobUrl } from 'types/routes';
 
 export function SingleJob() {
   const { id } = useParams<{ id: string }>();
@@ -29,6 +30,9 @@ export function SingleJob() {
       <Typography>Created at: {data.date}</Typography>
       <Typography>Description:</Typography>
       <Typography>{data.longDescription}</Typography>
+      <Button component={Link} to={getEditJobUrl(id)} variant="contained">
+        Edit
+      </Button>
     </>
   );
 }

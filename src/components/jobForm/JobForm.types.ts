@@ -1,4 +1,4 @@
-import { AddJobPayload } from '../../views/addJob/addJob.types';
+import { AddJobPayload } from '../api/addJob/addJob.types';
 
 export type JobFormProps =
   | {
