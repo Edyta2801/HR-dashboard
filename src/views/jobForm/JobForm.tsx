@@ -6,16 +6,24 @@ import { Box, Button, TextField, Typography } from '@mui/material';
 import { AddJobPayload } from '../addJob/addJob.types';
 import { ROUTES } from '../../types/routes';
 
-import { JobFormProps } from '../../views/jobForm/JobForm.types';
-import * as styles from '../../views/jobForm/JobForm.styles.ts';
+import { JobFormProps } from './JobForm.types';
+import * as styles from './JobForm.styles.ts';
 
-export const JobForm = (props: JobFormProps) => {
+export function JobForm(props: JobFormProps) {
+  const { type, handleJobFormSubmission } = props;
+
+  // Type assertion to handle different props based on type
+  const defaultValues =
+    type === 'edit'
+      ? (props as { defaultValues: Partial<AddJobPayload> }).defaultValues
+      : {};
+
   const {
     formState: { errors },
     register,
     handleSubmit,
   } = useForm<AddJobPayload>({
-    defaultValues: props.type === 'edit' ? props.defaultValues : {},
+    defaultValues,
   });
 
   const navigate = useNavigate();
@@ -24,7 +32,7 @@ export const JobForm = (props: JobFormProps) => {
 
   const onSubmit = async (payload: AddJobPayload) => {
     try {
-      await props.handleJobFormSubmission(payload);
+      await handleJobFormSubmission(payload);
       navigate(ROUTES.JOBS);
     } catch (_error) {
       setErrorMessage('Something went wrong, please try again');
@@ -108,4 +116,4 @@ export const JobForm = (props: JobFormProps) => {
       {errorMessage && <Typography color="error">{errorMessage}</Typography>}
     </Box>
   );
-};
+}
