@@ -4,6 +4,7 @@ import { DashboardLayout } from 'components/dashboardLayout/DashboardLayout';
 import { ProtectedRoute } from 'components/protectedRoute/ProtectedRoute';
 import {
   ROUTES,
+  getEditCandidateUrl,
   getEditJobUrl,
   getSingleCandidateUrl,
   getSingleJobUrl,
@@ -21,6 +22,8 @@ import { Candidates } from 'views/candidates/Candidates';
 import { SingleCandidate } from 'views/singleCandidate/SingleCandidate';
 import { AddJob } from 'views/addJob/AddJob';
 import { EditJob } from 'views/editJob/EditJob';
+import { EditCandidate } from 'views/editCandidate/EditCandidate';
+import { AddCandidate } from 'views/addCandidate/AddCandidate';
 
 function Router() {
   return (
@@ -49,11 +52,8 @@ function Router() {
           path={getSingleCandidateUrl(':id')}
           element={<SingleCandidate />}
         />
-        {/* <Route path={ROUTES.addCandidate} element={<AddCandidate />} />
-          <Route
-            path={getEditCandidateUrl(':id')}
-            element={<EditCandidate />}
-          /> */}
+        <Route path={ROUTES.addCandidate} element={<AddCandidate />} />
+        <Route path={getEditCandidateUrl(':id')} element={<EditCandidate />} />
       </Route>
     </Routes>
   );

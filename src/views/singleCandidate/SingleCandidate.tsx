@@ -28,6 +28,8 @@ export function SingleCandidate() {
       <Typography>Created at: {data.date}</Typography>
       <Typography>Position:</Typography>
       <Typography>{data.position}</Typography>
+      <Typography>Description:</Typography>
+      <Typography>{data.longDescription}</Typography>
       <Button component={Link} to={getEditCandidateUrl(id)} variant="contained">
         Edit
       </Button>
