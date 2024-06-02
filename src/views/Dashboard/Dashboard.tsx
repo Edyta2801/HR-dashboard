@@ -1,11 +1,25 @@
-import { Box, Typography } from '@mui/material';
+import { Box, CircularProgress, Typography } from '@mui/material';
 import { PersonOutline } from '@mui/icons-material';
 
 import { DashboardItem } from './dashboardItem/DashboardItem';
 import * as styles from './Dashboard.styles';
 import { SummaryItem } from './summaryItem/SummaryItem';
+import { useJobs } from 'components/api/jobs/useJobs';
+import { useCandidates } from 'components/api/candidates/useCandidates';
 
 export function Dashboard() {
+  const {
+    data: jobs,
+    errorMessage: jobsErrorMessage,
+    isLoading: isLoadingJobs,
+  } = useJobs();
+
+  const {
+    data: candidates,
+    errorMessage: candidatesErrorMessage,
+    isLoading: isLoadingCandidates,
+  } = useCandidates();
+
   return (
     <Box sx={styles.container}>
       <DashboardItem>
@@ -13,14 +27,20 @@ export function Dashboard() {
           Open positions
         </Typography>
 
-        <Typography color="error">
-          Something went wrong while loading open positions data, please try
-          again
-        </Typography>
+        {isLoadingJobs && <CircularProgress />}
 
-        <Typography variant="h5" component="p">
-          Jobs
-        </Typography>
+        {jobsErrorMessage && (
+          <Typography color="error">
+            Something went wrong while loading open positions data, please try
+            again
+          </Typography>
+        )}
+
+        {jobs && (
+          <Typography variant="h5" component="p">
+            {Object.keys(jobs).length}
+          </Typography>
+        )}
       </DashboardItem>
 
       <DashboardItem>
@@ -28,13 +48,19 @@ export function Dashboard() {
           Candidates
         </Typography>
 
-        <Typography color="error">
-          Something went wrong while loading candidates data, please try again
-        </Typography>
+        {isLoadingCandidates && <CircularProgress />}
 
-        <Typography variant="h5" component="p">
-          Candidates
-        </Typography>
+        {candidatesErrorMessage && (
+          <Typography color="error">
+            Something went wrong while loading candidates data, please try again
+          </Typography>
+        )}
+
+        {candidates && (
+          <Typography variant="h5" component="p">
+            {Object.keys(candidates).length}
+          </Typography>
+        )}
       </DashboardItem>
 
       <DashboardItem sx={styles.spanFull}>
@@ -63,7 +89,13 @@ export function Dashboard() {
             iconVariant="green"
             icon={<PersonOutline color="inherit" />}
             name="Candidates"
-            value="candidates"
+            value={
+              candidates ? (
+                Object.keys(candidates).length.toString(10)
+              ) : (
+                <CircularProgress />
+              )
+            }
           />
           <SummaryItem
             iconVariant="yellow"
