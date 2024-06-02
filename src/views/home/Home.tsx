@@ -1,23 +1,31 @@
+import { Paper, Typography, Box, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
-import Box from '@mui/material/Box';
-import { Typography } from '@mui/material';
+import * as styles from './Home.styles';
+import { ROUTES } from 'types/routes';
 
 function Home() {
   return (
-    <Box>
+    <Paper sx={styles.container}>
       <Typography variant="h1">HR analytics</Typography>
-      <Box>
-        <Typography variant="h4" align="center">
-          <Link to="/signin">Signin</Link>
-        </Typography>
-        <Typography variant="h4" align="center" sx={{ paddingTop: 5 }}>
-          <Link to="/signup">Signup</Link>
-        </Typography>
-        <Typography variant="h4" align="center" sx={{ paddingTop: 5 }}>
-          <Link to="/dashboard">Dadhboard</Link>
-        </Typography>
+      <Box sx={styles.buttonsContainer}>
+        <Button
+          component={Link}
+          to={ROUTES.SIGNIN}
+          variant="contained"
+          size="large"
+        >
+          Sign In
+        </Button>
+        <Button
+          component={Link}
+          to={ROUTES.SIGNUP}
+          variant="contained"
+          size="large"
+        >
+          Sign Up
+        </Button>
       </Box>
-    </Box>
+    </Paper>
   );
 }
 
