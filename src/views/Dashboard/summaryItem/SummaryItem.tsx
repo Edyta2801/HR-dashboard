@@ -1,9 +1,7 @@
 import { Box, Typography } from '@mui/material';
-
-import { mergeSx } from 'utils/mergeSx/mergeSx';
-
-import { SummaryItemProps } from './SummaryItem.types';
 import * as styles from './SummaryItem.styles';
+import { SummaryItemProps } from './SummaryItem.types';
+import { mergeSx } from '../../../utils/mergeSx/mergeSx';
 
 export function SummaryItem({
   icon,
