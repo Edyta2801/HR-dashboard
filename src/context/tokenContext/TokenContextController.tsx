@@ -1,7 +1,8 @@
 import { useCallback, useMemo, useState } from 'react';
+
 import { TokenContext } from './TokenContext';
 import {
-  OnTokenSaveArgs,
+  OnTokenSaveProps,
   TokenContextControllerProps,
 } from './TokenContext.types';
 
@@ -15,7 +16,7 @@ export function TokenContextController({
   );
 
   const onTokenSave = useCallback(
-    ({ newToken, storeTokenInStorage }: OnTokenSaveArgs) => {
+    ({ newToken, storeTokenInStorage }: OnTokenSaveProps) => {
       setAccessToken(newToken);
 
       if (storeTokenInStorage) {
@@ -25,9 +26,18 @@ export function TokenContextController({
     [],
   );
 
+  const onTokenClear = useCallback(() => {
+    setAccessToken(null);
+    localStorage.removeItem(tokenStorageKey);
+  }, []);
+
   const contextValue = useMemo(
-    () => ({ accessToken, onTokenSave }),
-    [accessToken, onTokenSave],
+    () => ({
+      accessToken,
+      onTokenSave,
+      onTokenClear,
+    }),
+    [accessToken, onTokenSave, onTokenClear],
   );
 
   return (

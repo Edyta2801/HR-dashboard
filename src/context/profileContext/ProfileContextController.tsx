@@ -5,10 +5,10 @@ import { ProfileContextControllerProps } from './ProfileContext.types';
 
 export const tokenStorageKey = 'access_token';
 
-export const ProfileContextController = ({
+export function ProfileContextController({
   children,
   profile,
-}: ProfileContextControllerProps) => {
+}: ProfileContextControllerProps) {
   const contextValue = useMemo(
     () => ({
       profile,
@@ -21,4 +21,4 @@ export const ProfileContextController = ({
       {children}
     </ProfileContext.Provider>
   );
-};
+}

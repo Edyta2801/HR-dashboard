@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { TokenContext } from './TokenContext';
 
-export const useTokenContext = () => {
+export function useTokenContext() {
   const ctx = useContext(TokenContext);
 
   if (!ctx)
@@ -9,4 +9,4 @@ export const useTokenContext = () => {
       'useTokenContext can only be used inside TokenContextController',
     );
   return ctx;
-};
+}

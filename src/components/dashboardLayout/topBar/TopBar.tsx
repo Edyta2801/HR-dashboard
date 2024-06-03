@@ -1,9 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
+import { PersonOutline, Logout } from '@mui/icons-material';
 import {
   AppBar,
   Avatar,
   Box,
-  Link,
   ListItemIcon,
   ListItemText,
   Menu,
@@ -11,11 +10,12 @@ import {
   Toolbar,
   Typography,
 } from '@mui/material';
-import { Logout, PersonOutline } from '@mui/icons-material';
-import { ROUTES } from '../../../types/routes';
+import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useProfileContext } from 'context/profileContext/useProfileContext';
+import { getInitials } from 'utils/getInitials/getInitials';
 import * as styles from './TopBar.styles';
-import { getInitials } from '../../../utils/getInitials/getInitials';
-import { useProfileContext } from '../../../context/profileContext/useProfileContext';
+import { ROUTES } from '../../../types/routes';
 
 export function TopBar() {
   const { profile } = useProfileContext();
@@ -23,6 +23,7 @@ export function TopBar() {
   const profileFullName = `${profile.firstname} ${profile.lastname}`;
 
   const avatarRef = useRef<HTMLDivElement | null>(null);
+
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
   const onMouseEnter = (event: React.MouseEvent<HTMLElement>) => {
@@ -79,22 +80,14 @@ export function TopBar() {
               <ListItemText>{profileFullName}</ListItemText>
             </MenuItem>
 
-            <MenuItem
-              sx={styles.menuItem}
-              component={Link}
-              href={ROUTES.PROFILE}
-            >
+            <MenuItem sx={styles.menuItem} component={Link} to={ROUTES.PROFILE}>
               <ListItemIcon>
                 <PersonOutline />
               </ListItemIcon>
               <ListItemText>Profile</ListItemText>
             </MenuItem>
 
-            <MenuItem
-              sx={styles.menuItem}
-              component={Link}
-              href={ROUTES.SIGNIN}
-            >
+            <MenuItem sx={styles.menuItem} component={Link} to={ROUTES.SIGNIN}>
               <ListItemIcon>
                 <Logout />
               </ListItemIcon>

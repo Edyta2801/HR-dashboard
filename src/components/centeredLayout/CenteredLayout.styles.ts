@@ -1,6 +1,6 @@
-import { Styles } from 'theme/theme';
+import { SxProps, Theme } from '@mui/material';
 
-export const layout: Styles = {
+export const container: SxProps<Theme> = {
   minHeight: '100vh',
   display: 'grid',
   placeItems: 'center',
