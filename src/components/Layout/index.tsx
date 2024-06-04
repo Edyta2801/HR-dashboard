@@ -10,7 +10,7 @@ import { ROUTES } from '../../types/routes';
 // import ErrorInfo from "../ErrorInfo";
 import Header from '../Header';
 import Navigation from '../Navigation';
-import ProfilePage from '../../views/Profile';
+import { Profile } from '../../views/Profile';
 import { Dashboard } from '../../views/Dashboard/Dashboard';
 import * as styles from './Layout.styles';
 import { Jobs } from 'views/jobs/Jobs';
@@ -34,7 +34,7 @@ function Layout({ children }: LayoutProps) {
       </Drawer>
       <Box component="main" sx={styles.main}>
         <Routes>
-          <Route path={ROUTES.PROFILE} element={<ProfilePage />} />
+          <Route path={ROUTES.PROFILE} element={<Profile />} />
           <Route path={ROUTES.JOBS} element={<Jobs />} />
           {/* <Route path="*" element={<ErrorInfo />} /> */}
           <Route path={ROUTES.DASHBOARD} element={<Dashboard />} />
