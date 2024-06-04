@@ -19,7 +19,7 @@ import { ROUTES } from '../../types/routes';
 
 import * as styles from './SigninForm.styles';
 
-export const SignIn = () => {
+export function SignIn() {
   const {
     formState: { errors },
     handleSubmit,
@@ -103,4 +103,4 @@ export const SignIn = () => {
       </Box>
     </Paper>
   );
-};
+}

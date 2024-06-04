@@ -1,4 +1,4 @@
-export type SignUpPayload = {
+export type RegisterPayload = {
   firstname: string;
   lastname: string;
   username: string;
