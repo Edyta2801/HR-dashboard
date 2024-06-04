@@ -3,6 +3,8 @@ import { jobRowsPerPage } from 'views/jobs/jobsRowsPerPage';
 import { JobsResponse } from './jobs.types';
 import { useAxios } from '../useAxios/useAxios';
 
+const defaultRowsPerPage = 10; // Ustaw domyślną wartość
+
 export const useJobs = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string>();
@@ -10,7 +12,9 @@ export const useJobs = () => {
   const axios = useAxios();
   const [paginatedData, setPaginatedData] = useState<JobsResponse>();
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(jobRowsPerPage[0]!);
+  const [rowsPerPage, setRowsPerPage] = useState(
+    jobRowsPerPage[0] || defaultRowsPerPage,
+  );
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResult, setSearchResult] = useState<JobsResponse>();
 

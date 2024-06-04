@@ -12,7 +12,9 @@ export const useCandidates = () => {
   const axios = useAxios();
   const [paginatedData, setPaginatedData] = useState<CandidatesResponse>();
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(candidatesRowsPerPage[0]!);
+  const [rowsPerPage, setRowsPerPage] = useState(
+    candidatesRowsPerPage.length > 0 ? candidatesRowsPerPage[0] : 10, // Default value if array is empty
+  );
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResult, setSearchResult] = useState<CandidatesResponse>();
 
@@ -89,8 +91,8 @@ export const useCandidates = () => {
     setPage(newPage);
   }, []);
 
-  const onChangeRowsPerPage = useCallback((newPage: number) => {
-    setRowsPerPage(newPage);
+  const onChangeRowsPerPage = useCallback((newRowsPerPage: number) => {
+    setRowsPerPage(newRowsPerPage);
   }, []);
 
   const onCandidateDelete = useCallback(

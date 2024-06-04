@@ -20,10 +20,9 @@ import {
 import { Dashboard } from '../../views/Dashboard/Dashboard';
 import Home from '../../views/home/Home';
 import { Jobs } from '../../views/jobs/Jobs';
-import Signin from '../../views/SigninPage';
-
-import Signup from '../../views/SignupPage';
 import { Profile } from '../../views/Profile';
+import Signin from '../../views/SigninPage';
+import Signup from '../../views/SignupPage';
 
 function Router() {
   return (
