@@ -1,9 +1,9 @@
-import { useParams } from 'react-router-dom';
 import { CircularProgress, Typography } from '@mui/material';
+import { useParams } from 'react-router-dom';
 
-import { CandidatesForm } from '../../components/candidatesForm/CandidatesForm';
 import { useCandidate } from '../../components/api/candidate/useCandidate';
 import { useEditCandidate } from '../../components/api/editCandidate/useEditCandidate';
+import { CandidatesForm } from '../../components/candidatesForm/CandidatesForm';
 
 export function EditCandidate() {
   const { id } = useParams<{ id: string }>();

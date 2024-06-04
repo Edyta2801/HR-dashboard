@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import { useAxios } from '../useAxios/useAxios';
 import { candidatesRowsPerPage } from 'views/candidates/candidatesRowsPerPage';
 
 import { CandidatesResponse } from './candidates.types';
+import { useAxios } from '../useAxios/useAxios';
 
 export const useCandidates = () => {
   const [isLoading, setIsLoading] = useState(true);

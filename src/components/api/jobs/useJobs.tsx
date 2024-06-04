@@ -1,8 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { jobRowsPerPage } from 'views/jobs/jobsRowsPerPage';
-import { useAxios } from '../useAxios/useAxios';
-
 import { JobsResponse } from './jobs.types';
+import { useAxios } from '../useAxios/useAxios';
 
 export const useJobs = () => {
   const [isLoading, setIsLoading] = useState(true);

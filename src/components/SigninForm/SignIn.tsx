@@ -12,12 +12,11 @@ import {
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
+import * as styles from './SigninForm.styles';
+import { ROUTES } from '../../types/routes';
 import { emailRegex } from '../../utils/emailRegex';
 import { LoginPayload } from '../api/login/login.types';
 import { useLogin } from '../api/login/useLogin';
-import { ROUTES } from '../../types/routes';
-
-import * as styles from './SigninForm.styles';
 
 export function SignIn() {
   const {

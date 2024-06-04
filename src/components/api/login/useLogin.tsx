@@ -1,12 +1,12 @@
 import { useReducer, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { isAxiosError, useAxios } from '../useAxios/useAxios';
-import { ROUTES } from '../../../types/routes';
 import { useTokenContext } from 'context/tokenContext/useTokenContext';
 
 import { LoginPayload, LoginResponse } from './login.types';
 import { defaultLoginReducerState, loginReducer } from './loginReducer';
+import { ROUTES } from '../../../types/routes';
+import { isAxiosError, useAxios } from '../useAxios/useAxios';
 
 export const useLogin = () => {
   const [isRememberMeChecked, setIsRememberMeChecked] = useState(false);

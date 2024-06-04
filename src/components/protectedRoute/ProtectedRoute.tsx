@@ -1,14 +1,13 @@
-import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
 import { CircularProgress } from '@mui/material';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import { ROUTES } from '../../types/routes';
-import { useProfile } from '../api/profile/useProfile';
+import CenteredLayout from 'components/centeredLayout/CenteredLayout';
 import { ProfileContextController } from 'context/profileContext/ProfileContextController';
 import { useTokenContext } from 'context/tokenContext/useTokenContext';
-
 import { ProtectedRouteProps } from './ProtectedRoute.types';
-import CenteredLayout from 'components/centeredLayout/CenteredLayout';
+import { ROUTES } from '../../types/routes';
+import { useProfile } from '../api/profile/useProfile';
 
 export function ProtectedRoute({ children }: ProtectedRouteProps) {
   const { data, isLoading, errorMessage } = useProfile();

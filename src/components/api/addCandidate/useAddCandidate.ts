@@ -1,6 +1,5 @@
-import { useAxios } from '../useAxios/useAxios';
-
 import { AddCandidatePayload } from './addCandidate.types';
+import { useAxios } from '../useAxios/useAxios';
 
 export const useAddCandidate = () => {
   const axios = useAxios();

@@ -2,6 +2,13 @@ import { Route, Routes } from 'react-router-dom';
 import CenteredLayout from 'components/centeredLayout/CenteredLayout';
 import { DashboardLayout } from 'components/dashboardLayout/DashboardLayout';
 import { ProtectedRoute } from 'components/protectedRoute/ProtectedRoute';
+import { AddCandidate } from 'views/addCandidate/AddCandidate';
+import { AddJob } from 'views/addJob/AddJob';
+import { Candidates } from 'views/candidates/Candidates';
+import { EditCandidate } from 'views/editCandidate/EditCandidate';
+import { EditJob } from 'views/editJob/EditJob';
+import { SingleCandidate } from 'views/singleCandidate/SingleCandidate';
+import { SingleJob } from 'views/singleJob/SingleJob';
 import {
   ROUTES,
   getEditCandidateUrl,
@@ -10,20 +17,13 @@ import {
   getSingleJobUrl,
 } from '../../types/routes';
 
+import { Dashboard } from '../../views/Dashboard/Dashboard';
+import Home from '../../views/home/Home';
+import { Jobs } from '../../views/jobs/Jobs';
 import Signin from '../../views/SigninPage';
 
-import Home from '../../views/home/Home';
 import Signup from '../../views/SignupPage';
-import { Jobs } from '../../views/jobs/Jobs';
-import { Dashboard } from '../../views/Dashboard/Dashboard';
 import { Profile } from '../../views/Profile';
-import { SingleJob } from 'views/singleJob/SingleJob';
-import { Candidates } from 'views/candidates/Candidates';
-import { SingleCandidate } from 'views/singleCandidate/SingleCandidate';
-import { AddJob } from 'views/addJob/AddJob';
-import { EditJob } from 'views/editJob/EditJob';
-import { EditCandidate } from 'views/editCandidate/EditCandidate';
-import { AddCandidate } from 'views/addCandidate/AddCandidate';
 
 function Router() {
   return (

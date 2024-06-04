@@ -9,12 +9,11 @@ import {
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
-import { RegisterPayload } from '../api/register/register.types';
-import { useRegister } from '../api/register/useRegister';
+import * as styles from './SignupForm.styles';
 import { ROUTES } from '../../types/routes';
 import { emailRegex } from '../../utils/emailRegex';
-
-import * as styles from './SignupForm.styles';
+import { RegisterPayload } from '../api/register/register.types';
+import { useRegister } from '../api/register/useRegister';
 
 export function SignUp() {
   const {

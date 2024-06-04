@@ -1,10 +1,9 @@
-import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-
-import { isAxiosError, useAxios } from '../useAxios/useAxios';
-import { ROUTES } from '../../../types/routes';
+import { useNavigate } from 'react-router-dom';
 
 import { RegisterPayload } from './register.types';
+import { ROUTES } from '../../../types/routes';
+import { isAxiosError, useAxios } from '../useAxios/useAxios';
 
 export const useRegister = () => {
   const navigate = useNavigate();

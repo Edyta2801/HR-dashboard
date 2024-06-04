@@ -1,8 +1,8 @@
 import { Button, CircularProgress, Typography } from '@mui/material';
 import { Link, useParams } from 'react-router-dom';
 
-import { useJob } from '../../components/api/job/useJob';
 import { getEditJobUrl } from 'types/routes';
+import { useJob } from '../../components/api/job/useJob';
 
 export function SingleJob() {
   const { id } = useParams<{ id: string }>();

@@ -1,8 +1,8 @@
 import { Box } from '@mui/material';
 import { Outlet } from 'react-router-dom';
 import * as styles from './DashboardLayout.styles';
-import { TopBar } from './topBar/TopBar';
 import { SideBar } from './sideBar/SideBar';
+import { TopBar } from './topBar/TopBar';
 
 export function DashboardLayout() {
   return (

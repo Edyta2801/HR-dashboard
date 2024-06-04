@@ -1,13 +1,12 @@
-import { useForm } from 'react-hook-form';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Box, Button, TextField, Typography } from '@mui/material';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
+import * as styles from './CandidatesForm.styles.ts';
+import { CandidatesFormProps } from './CandidatesForm.types';
 import { ROUTES } from '../../types/routes';
 import { AddCandidatePayload } from '../api/addCandidate/addCandidate.types';
-
-import { CandidatesFormProps } from './CandidatesForm.types';
-import * as styles from './CandidatesForm.styles.ts';
 
 export function CandidatesForm(props: CandidatesFormProps) {
   const { type, handleCandidateFormSubmission } = props;

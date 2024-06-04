@@ -16,4 +16,3 @@ const profileHandler = rest.get(
 );
 
 export const handlers = [loginHandler, profileHandler];
-

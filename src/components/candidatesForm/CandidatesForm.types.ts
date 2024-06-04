@@ -1,4 +1,4 @@
-import { AddCandidatePayload } from '../../components/api/addCandidate/addCandidate.types';
+import { AddCandidatePayload } from '../api/addCandidate/addCandidate.types';
 
 export type CandidatesFormProps =
   | {

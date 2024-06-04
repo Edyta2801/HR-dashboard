@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import { useAxios } from '../useAxios/useAxios';
 import { Candidate } from '../candidates/candidates.types';
+import { useAxios } from '../useAxios/useAxios';
 
 export const useCandidate = (candidateId: string) => {
   const [isLoading, setIsLoading] = useState(true);

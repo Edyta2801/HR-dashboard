@@ -1,7 +1,7 @@
 import { CssBaseline, ThemeProvider } from '@mui/material';
+import { TokenContextController } from 'context/tokenContext/TokenContextController';
 import { theme } from 'theme/theme';
 
-import { TokenContextController } from 'context/tokenContext/TokenContextController';
 import { AppProvidersProps } from './AppProviders.types';
 
 export function AppProviders({ children }: AppProvidersProps) {

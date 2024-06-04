@@ -4,13 +4,13 @@ import { MemoryRouter as Router } from 'react-router-dom';
 
 import { AppProviders } from 'appProviders/AppProviders';
 
-const Wrapper = ({ children }: { children: ReactNode }) => {
+function Wrapper({ children }: { children: ReactNode }) {
   return (
     <Router>
       <AppProviders>{children}</AppProviders>
     </Router>
   );
-};
+}
 
 const customRender = (
   ui: ReactElement,

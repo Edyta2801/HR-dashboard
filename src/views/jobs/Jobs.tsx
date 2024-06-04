@@ -14,12 +14,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useJobs } from 'components/api/jobs/useJobs';
 import { Table } from 'components/table/Table';
 
-import { ROUTES, getSingleJobUrl } from '../../types/routes';
-
 import * as styles from './Job.styles';
 import { JobsTableColumnNames } from './Jobs.types';
 import { jobsColumns } from './jobsColumns';
 import { jobRowsPerPage } from './jobsRowsPerPage';
+import { ROUTES, getSingleJobUrl } from '../../types/routes';
 
 export function Jobs() {
   const {

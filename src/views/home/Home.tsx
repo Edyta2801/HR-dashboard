@@ -1,7 +1,7 @@
 import { Paper, Typography, Box, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
-import * as styles from './Home.styles';
 import { ROUTES } from 'types/routes';
+import * as styles from './Home.styles';
 
 function Home() {
   return (

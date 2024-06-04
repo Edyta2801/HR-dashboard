@@ -1,8 +1,8 @@
 import userEvent from '@testing-library/user-event';
-import { act, render, screen } from 'tests';
-import { SignIn } from './SignIn';
-import { server } from 'tests/msw/server';
 import { rest } from 'msw';
+import { act, render, screen } from 'tests';
+import { server } from 'tests/msw/server';
+import { SignIn } from './SignIn';
 
 const mockNavigate = jest.fn();
 

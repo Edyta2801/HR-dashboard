@@ -1,19 +1,19 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import Drawer from '@mui/material/Drawer';
 import Divider from '@mui/material/Divider';
+import Drawer from '@mui/material/Drawer';
+import Toolbar from '@mui/material/Toolbar';
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import { Jobs } from 'views/jobs/Jobs';
+import * as styles from './Layout.styles';
 import { ROUTES } from '../../types/routes';
 // import ErrorInfo from "../ErrorInfo";
+import { Dashboard } from '../../views/Dashboard/Dashboard';
+import { Profile } from '../../views/Profile';
 import Header from '../Header';
 import Navigation from '../Navigation';
-import { Profile } from '../../views/Profile';
-import { Dashboard } from '../../views/Dashboard/Dashboard';
-import * as styles from './Layout.styles';
-import { Jobs } from 'views/jobs/Jobs';
 
 type LayoutProps = {
   children: React.ReactNode;

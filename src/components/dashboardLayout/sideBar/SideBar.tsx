@@ -7,8 +7,8 @@ import {
   ListItemText,
 } from '@mui/material';
 import { NavLink } from 'react-router-dom';
-import { sidebarItems } from './SideBraItems';
 import * as styles from './SideBar.styles';
+import { sidebarItems } from './SideBraItems';
 
 export function SideBar() {
   return (

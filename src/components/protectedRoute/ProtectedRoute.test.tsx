@@ -1,10 +1,10 @@
 import { rest } from 'msw';
 
+import { tokenStorageKey } from 'context/tokenContext/TokenContextController';
 import { render, screen } from 'tests';
 import { server } from 'tests/msw/server';
 
 import { ProtectedRoute } from './ProtectedRoute';
-import { tokenStorageKey } from 'context/tokenContext/TokenContextController';
 
 const mockNavigate = jest.fn();
 

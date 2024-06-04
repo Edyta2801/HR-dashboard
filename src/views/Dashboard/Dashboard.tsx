@@ -1,11 +1,11 @@
-import { Box, CircularProgress, Typography } from '@mui/material';
 import { PersonOutline } from '@mui/icons-material';
+import { Box, CircularProgress, Typography } from '@mui/material';
 
-import { DashboardItem } from './dashboardItem/DashboardItem';
-import * as styles from './Dashboard.styles';
-import { SummaryItem } from './summaryItem/SummaryItem';
-import { useJobs } from 'components/api/jobs/useJobs';
 import { useCandidates } from 'components/api/candidates/useCandidates';
+import { useJobs } from 'components/api/jobs/useJobs';
+import * as styles from './Dashboard.styles';
+import { DashboardItem } from './dashboardItem/DashboardItem';
+import { SummaryItem } from './summaryItem/SummaryItem';
 
 export function Dashboard() {
   const {

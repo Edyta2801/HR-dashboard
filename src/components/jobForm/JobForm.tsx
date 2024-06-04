@@ -1,13 +1,12 @@
-import { useForm } from 'react-hook-form';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Box, Button, TextField, Typography } from '@mui/material';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
-import { AddJobPayload } from '../api/addJob/addJob.types';
-import { ROUTES } from '../../types/routes';
-
-import { JobFormProps } from './JobForm.types';
 import * as styles from './JobForm.styles.ts';
+import { JobFormProps } from './JobForm.types';
+import { ROUTES } from '../../types/routes';
+import { AddJobPayload } from '../api/addJob/addJob.types';
 
 export function JobForm(props: JobFormProps) {
   const { type, handleJobFormSubmission } = props;
