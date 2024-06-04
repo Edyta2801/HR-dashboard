@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useReducer } from 'react';
 
-import { isAxiosError } from '../useAxios/axios';
+import { isAxiosError } from '../useAxios/useAxios';
 import { defaultState, queryReducer } from './queryReducer';
 import { useAxios } from '../useAxios/useAxios';
 import { QueryState, QueryAction, UseQueryProps } from './useQuery.types';

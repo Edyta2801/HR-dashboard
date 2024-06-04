@@ -1,21 +1,24 @@
-import { MutationAction, MutationState } from './useMutation.types';
+import { LoginAction, LoginReducerState } from './login.types';
 
-export const defaultState: MutationState = {
-  errorMessage: undefined,
+export const defaultLoginReducerState: LoginReducerState = {
   isLoading: false,
+  errorMessage: undefined,
 };
 
-export const mutationReducer = (
-  state: MutationState,
-  action: MutationAction,
-): MutationState => {
+export const loginReducer = (
+  state: LoginReducerState,
+  action: LoginAction,
+): LoginReducerState => {
   switch (action.type) {
     case 'init':
       return { isLoading: true, errorMessage: undefined };
+
     case 'finish':
       return { ...state, isLoading: false };
+
     case 'error':
       return { isLoading: false, errorMessage: action.payload };
+
     default:
       throw new Error('Wrong action type');
   }

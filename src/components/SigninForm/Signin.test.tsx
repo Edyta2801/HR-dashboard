@@ -1,6 +1,6 @@
 import userEvent from '@testing-library/user-event';
 import { act, render, screen } from 'tests';
-import SigninForm from '.';
+import { SignIn } from './SignIn';
 import { server } from 'tests/msw/server';
 import { rest } from 'msw';
 
@@ -21,7 +21,7 @@ describe('Signin', () => {
   // });
 
   it('renders title', () => {
-    render(<SigninForm />);
+    render(<SignIn />);
 
     const title = screen.getByText(/User Sign In/);
 
@@ -29,20 +29,20 @@ describe('Signin', () => {
   });
 
   it('renders usernameField', () => {
-    render(<SigninForm />);
+    render(<SignIn />);
 
     const usernameField = screen.getByPlaceholderText(/Email */);
     expect(usernameField).toBeInTheDocument();
   });
   it('renders passwordField', () => {
-    render(<SigninForm />);
+    render(<SignIn />);
 
     const passwordField = screen.getByPlaceholderText(/Password */);
     expect(passwordField).toBeInTheDocument();
   });
 
   it('redirects to home on login', async () => {
-    render(<SigninForm />);
+    render(<SignIn />);
     const emailField = screen.getByPlaceholderText(/Email */);
     const passwordField = screen.getByPlaceholderText(/Password */);
     const submitButton = screen.getByRole('button');
@@ -63,7 +63,7 @@ describe('Signin', () => {
       ),
     );
 
-    render(<SigninForm />);
+    render(<SignIn />);
     const emailField = screen.getByPlaceholderText(/Email */);
     const passwordField = screen.getByPlaceholderText(/Password */);
     const submitButton = screen.getByRole('button');
